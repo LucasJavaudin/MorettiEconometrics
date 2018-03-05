@@ -74,7 +74,7 @@ df$id.eff <- rnorm(nlevels(df$id))
 # Add a dummy variable for sequel.
 df$sequel <- df$genre1 == 'Sequel'
 # Teen movies are used to measure the size of the social network.
-df$network_size <- df$genre1 %in% c('Action', 'Aventure', 'Comedy', 'Fantasy', 'Horror', 'Sci-Fi', 'Suspense')
+df$network_size <- df$genre1 %in% c('Action', 'Adventure', 'Comedy', 'Fantasy', 'Horror', 'Sci-Fi', 'Suspense')
 df$network_size2 <- df$genre2 %in% c('Children', 'Youth')
 df$network_size3 <- df$genre3 %in% c('Children', 'Youth')
 
