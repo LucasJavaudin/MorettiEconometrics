@@ -106,7 +106,7 @@ df$top_surprise <- df$surprise >= q_surprise[2]
 regSaleDynamics1 <- felm(log_entree_paris ~ t | X, data = df)
 regSaleDynamics2 <- felm(log_entree_paris ~ t + t : surprise | X, data = df)
 regSaleDynamics3 <- felm(log_entree_paris ~ t + t : positive_surprise | X, data = df)
-regSaleDynamics4 <- felm(log_entree_paris ~ t : bottom_surprise + t : middle_surprise | X, data = df)
+regSaleDynamics4 <- felm(log_entree_paris ~ I(t * bottom_surprise) + I(t * middle_surprise) + I(t * top_surprise) | X, data = df)
 
 # Print a table with the results of the regressions.
 stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, type='text', omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
@@ -321,7 +321,7 @@ df$top_surprise <- df$surprise >= q_surprise[2]
 regSaleDynamics1 <- felm(log_entree_fr ~ t | X, data = df)
 regSaleDynamics2 <- felm(log_entree_fr ~ t + t : surprise | X, data = df)
 regSaleDynamics3 <- felm(log_entree_fr ~ t + t : positive_surprise | X, data = df)
-regSaleDynamics4 <- felm(log_entree_fr ~ t : bottom_surprise + t : middle_surprise | X, data = df)
+regSaleDynamics4 <- felm(log_entree_fr ~ I(t * bottom_surprise) + I(t * middle_surprise) + I(t * top_surprise) | X, data = df)
 
 # Print a table with the results of the regressions.
 stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, type='text', omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
