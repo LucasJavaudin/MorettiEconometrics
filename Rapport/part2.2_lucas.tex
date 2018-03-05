@@ -1,5 +1,4 @@
 \subsection{Size of the Social Network}\label{subsec2.4}
-\label{sub:size_of_the_social_network}
 
 Consumers with a larger social network receive more feedbacks from their peers and thus they are able to evaluate more precisely the quality of the movie.
 %More formally, this prediction can be tested by estimating the following model:
@@ -48,13 +47,38 @@ Adjusted R$^{2}$ & 0.844 & 0.856 \\
 \end{table}
 
 \subsection{Does learning decline over time?}\label{subsec2.5}
-\label{sub:does_learning_decline_over_time_}
+
+The model predicts that the effects of positive and negative surprises should decline over time.
+More precisely, sales profile should be a concave function of time for positive surprises and a convex function of time for negative surprises.
+To test this prediction, we need to estimate the sales profile which is assumed to be a quadratic function of time.
+Therefore, we estimate the following model:
+\begin{equation*}
+	\ln y_{jt} = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 (t \times \text{positive\_surprise}) + \beta_4 (t^2 \times \text{positive\_surprise}) + d_j + u_{jt}.
+\end{equation*}
+The results are reported in table \ref{pred4}.
+The second derivative of log of entries for negative-surprise movies is 
+\begin{equation*}
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{\text{postive\_surprise=0}} = 2 \beta_2.
+\end{equation*}
+The second derivative of log of entries for positive-surprise movies is 
+\begin{equation*}
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{\text{postive\_surprise=1}} = 2 (\beta_2 + \beta_4).
+\end{equation*}
+We can test the hypothesis of convexity ($2\beta_2 > 0$) and the hypothesis of concavity ($2(\beta_2 + \beta_4) < 0$) with Student tests.
+For instance, to test $H_0:~2(\beta_2 + \beta_4) < 0$ against $H_1:~2(\beta_2 + \beta_4) > 0$, the $t$ statistic is
+\begin{equation*}
+	t = \frac{2(\hat{\beta}_2 + \hat{\beta}_4)}{\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4))} .
+\end{equation*}
+With the US data, both hypotheses cannot be rejected with a good confidence.
+With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0. 
+However, the hypothesis of concavity of positive-surprise movies must be rejected ($p$-value = 1).
+What we can say however is that the sales profile of positive-surprise movies is "more concave" than the sales profile of negative-surprise movies because the estimates show that the coefficient $\beta_4$ is significantly negative.
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Fri, Mar 02, 2018 - 05:12:25 PM
 \begin{table}[!htbp] \centering 
   \caption{Convexity of the sales profile} 
-  \label{} 
+  \label{pred4} 
 \begin{tabular}{@{\extracolsep{5pt}}lc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 

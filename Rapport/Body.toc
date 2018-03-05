@@ -8,4 +8,4 @@
 \contentsline {subsection}{\numberline {2.3}Precision of the prior}{3}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Size of the Social Network}{12}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Does learning decline over time?}{12}{subsection.2.5}
-\contentsline {section}{\numberline {3}Conclusion: some comments}{13}{section.3}
+\contentsline {section}{\numberline {3}Conclusion: some comments}{14}{section.3}
