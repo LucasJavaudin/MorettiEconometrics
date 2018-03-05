@@ -6,7 +6,15 @@
 
 % The effect of a surprise should be lower for movies with a more precise prior. To test this, we augment the previous regression equation with the interaction of time and the precision of the prior and the interaction of time, precision of the prior and surprise of the movie (whose coefficient is predicted to be negative). The precision of the prior can be a dummy for sequels (sequels are assumed to have a more precise prior) or can be measured by the variance of the first week surprise for movies of the same genre.
 
-\subsection{Identification of the surprises}
+Moretti's purpose is to provide evidence of social learning in consumption, that is to say that people tend to take into account their peers' experience to get a more precise idea of the value of a good. Economists, Moretti says, have had difficulties showing such social learning effects because of the absence of useful microdata on the matter. Moretti's innovation lies in his use of market-level data to identify social learning. He does so by defining what he calls ``surprises'' in movie sales: surprises, as their name suggests, consist in the difference between expected and actual sales. Moretti proposes that if we observe a surprise, we should also observe social learning effects: if a film is better or worse than expected, then by gathering experience through peers, people should reconsider their expectations and we might be able to see it in the data. In particular, Moretti makes five predictions on things we should be able to observe in presence of social learning: \begin{enumerate}
+	\item in presence of social learning, sales of movies with positive and negative surprises should diverge: sales of better-than-expected movies should decrease at a lower rate than worse ones (see \ref{subsec2.2}); 
+	\item we should observe less social learning effects from a movie on which quality we have a precise idea and more social learning effects from movies which have a more uncertain quality (see \ref{subsec2.3});
+	\item we should observe more social learning effects when people have a greater social network (see \ref{subsec2.4});
+	\item we should be able to observe that the effects of a surprise decline over time: once the information on the quality of a movie has been shared, what was a surprise should not play a major role in sales (see \ref{subsec2.5});
+	\item we should not observe social learning effects when a surprise is due to elements other than quality of the film (let say weather).
+\end{enumerate}
+We have replicated Moretti's work and tried to confront his predictions with French data.
+\subsection{Identification of the surprises}\label{subsec2.1}
 
 Surprises consist in the residuals of the regression of the log-number of sales in the first week on the log-number of screens available (opened by theaters). This definition of surprises holds because we suppose that theaters are profit-maximizing agents and make use of all the available information to predict the success of a movie. If this definition is correct, we should expect log-number of screens opened by theaters first week to be a good indicator of knowledge available on the movie quality before it is released. In the Table \ref{part2.1_tab1} we reproduce Moretti's regression of \textit{log\_sales\_first\_we} on \textit{log\_screens\_first\_week}. Each column is the result of the regression when we control with some variables (film genre, rating available, cost, distributor, weekday, month, week, year). The fact that adding control variables doesn't change the robustness of the regression proves Moretti's point which is that theaters take into account these factors when deciding their number of available screens. 
 
@@ -32,28 +40,28 @@ Surprises consist in the residuals of the regression of the log-number of sales 
 		\textit{Note:}  & \multicolumn{7}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
 \end{table} 
-In fact, theaters perform more than what we could do using all the data available in the data set. Regressing first week-end sales on our control variables gives us a R\textsuperscript{2} of .7, which is smaller than .9 performed by theaters only.
-\todo{is this useful?}
-\todo{nope, you only need the significativity of the coefficient}
-\begin{table}[!htbp] \centering 
-	\caption{Regression of first-weekend sales on control variables} 
-	\label{part2.1_tab2} 
-	\begin{tabular}{@{\extracolsep{5pt}}lc} 
-		\\[-1.8ex]\hline 
-		\hline \\[-1.8ex] 
-		& \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-		\cline{2-2} 
-		\\[-1.8ex] & log\_sales\_first\_we \\ 
-		\hline \\[-1.8ex] 
-		\hline \\[-1.8ex] 
-		Observations & 4,992 \\ 
-		R$^{2}$ & 0.699 \\ 
-		Adjusted R$^{2}$ & 0.674 \\ 
-		\hline 
-		\hline \\[-1.8ex] 
-		\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-	\end{tabular} 
-\end{table}
+%In fact, theaters perform more than what we could do using all the data available in the data set. Regressing first week-end sales on our control variables gives us a R\textsuperscript{2} of .7, which is smaller than .9 performed by theaters only.
+%\todo{is this useful?}
+%\todo{nope, you only need the significativity of the coefficient}
+%\begin{table}[!htbp] \centering 
+%	\caption{Regression of first-weekend sales on control variables} 
+%	\label{part2.1_tab2} 
+%	\begin{tabular}{@{\extracolsep{5pt}}lc} 
+%		\\[-1.8ex]\hline 
+%		\hline \\[-1.8ex] 
+%		& \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+%		\cline{2-2} 
+%		\\[-1.8ex] & log\_sales\_first\_we \\ 
+%		\hline \\[-1.8ex] 
+%		\hline \\[-1.8ex] 
+%		Observations & 4,992 \\ 
+%		R$^{2}$ & 0.699 \\ 
+%		Adjusted R$^{2}$ & 0.674 \\ 
+%		\hline 
+%		\hline \\[-1.8ex] 
+%		\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+%	\end{tabular} 
+%\end{table}
 \paragraph*{}
 We have performed the same kind of regression on France data from 2004 to 2008 and find quite similar results (Table \ref{part2.1_tab3} for France data and Table \ref{part2.1_tab4} for Paris data only\footnote{Data available for Paris are richer of 600 movies than France.}).
 \begin{table}[!htbp] \centering 
@@ -378,5 +386,5 @@ PARIS
 		\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
 \end{table} 
-\subsection{Divergence of the sales}
-\subsection{Precision of the prior}
+\subsection{Divergence of the sales}\label{subsec2.2}
+\subsection{Precision of the prior}\label{subsec2.3}
