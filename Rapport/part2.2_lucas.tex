@@ -91,18 +91,18 @@ where $S_j$ is a dummy for positive surprise.
 The results are reported in table \ref{pred4}.
 The second derivative of log of entries for negative-surprise movies is 
 \begin{equation*}
-	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=0}} = 2 \beta_2.
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=0} = 2 \beta_2.
 \end{equation*}
 The second derivative of log of entries for positive-surprise movies is 
 \begin{equation*}
-	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=1}} = 2 (\beta_2 + \beta_4).
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=1} = 2 (\beta_2 + \beta_4).
 \end{equation*}
 We can test the hypothesis of convexity ($2\beta_2 > 0$) and the hypothesis of concavity ($2(\beta_2 + \beta_4) < 0$) with Student tests.
 For instance, to test $H_0:~2(\beta_2 + \beta_4) < 0$ against $H_1:~2(\beta_2 + \beta_4) > 0$, the $t$ statistic is
 \begin{equation*}
 	t = \frac{2(\hat{\beta}_2 + \hat{\beta}_4)}{\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4))} 
 \end{equation*}
-where $\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4)) = 2[{\text{Var}(\hat{\beta}_2) + \text{Var}(\hat{\beta}_4) + 2\cdot \text{Cov}(\hat{\beta}_2, \hat{\beta}_4)]^{1/2}$ is the standard error of $2(\hat{\beta}_2 + \hat{\beta}_4)$.
+where $\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4)) = 2[\text{Var}(\hat{\beta}_2) + \text{Var}(\hat{\beta}_4) + 2\cdot \text{Cov}(\hat{\beta}_2, \hat{\beta}_4)]^{1/2}$ is the standard error of $2(\hat{\beta}_2 + \hat{\beta}_4)$.
 
 With the US data, both hypotheses cannot be rejected with a good confidence.
 With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0 ($t \approx 36.72$ and $p \approx 0$). 
