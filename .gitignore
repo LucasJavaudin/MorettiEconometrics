@@ -1,7 +1,8 @@
-*.log
-*.synctex.gz
-*.fdb_latexmk
-*.fls
-*.aux
-*.out
-*.toc
+Rapport/*.log
+Rapport/*.synctex.gz
+Rapport/*.fdb_latexmk
+Rapport/*.fls
+Rapport/*.aux
+Rapport/*.out
+Rapport/*.toc
+Rapport/Body.log
