@@ -13,6 +13,35 @@
 \usepackage{theorem}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{float}
+
+\usepackage{appendix}
+
+%%%%%%%%%%%%INCLUDE R CODE
+\usepackage{listings}
+\lstset{
+	language=R,
+	basicstyle=\scriptsize\ttfamily,
+	commentstyle=\ttfamily\color{blue},
+	numbers=left,
+	numberstyle=\ttfamily\color{gray}\footnotesize,
+	stepnumber=1,
+	numbersep=5pt,
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	frame=single,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=false,
+	title=\lstname,
+	escapeinside={},
+	keywordstyle={},
+	morekeywords={}
+}
+%%%%%%%%%%%%
 %\hypersetup{backref, pdfpagemode=FullScreen, colorlinks=true, linkcolor={blue}}
 %\usepackage[]{color}
 \setlength{\headheight}{15.5pt}
@@ -62,6 +91,67 @@
 \input{part2.2_lucas.tex}
 \pagebreak
 \section{Conclusion: some comments}
+\pagebreak
+\begin{appendices}
+\section{R codes}
+\paragraph{Data cleaning}
+\begin{lstlisting}
+	###################
+	#  Data Cleaning  #
+	###################
+	
+	# In this part, we change the dataset to make it closer to the dataset of Moretti.
+	
+	# Remove the movies without any screen in France during the first week (667 movies).
+	fr_df <- fr_df[!is.na(fr_df$seance_fr1),]
+	# Remove the movies without any id_distributeur (4 movies).
+	fr_df <- fr_df[!is.na(fr_df$id_distributeur),]
+	
+	# Set MoyennePresse and MoyenneSpectateur to the mean if no value is specified.
+	mean_moy <- mean(fr_df[!is.na(fr_df$MoyennePresse), 'MoyennePresse'])
+	fr_df[is.na(fr_df$MoyennePresse), 'MoyennePresse'] <- mean_moy
+	mean_moy <- mean(fr_df[!is.na(fr_df$MoyenneSpectateur), 'MoyenneSpectateur'])
+	fr_df[is.na(fr_df$MoyenneSpectateur), 'MoyenneSpectateur'] <- mean_moy
+	
+	# Repeat each columns 13 times.
+	n <- nrow(fr_df)
+	df <- fr_df[rep(1:n, each=13),]
+	
+	# Add a column to indicate the week.
+	df$t <- rep(0:12, n)
+	
+	# Replace the variables for each week (e.g. 'entree_paris1') with a global variable (e.g. 'entree_paris')
+	for (i in 0:12) {
+	for (variable in c('entree_paris', 'seance_paris', 'entree_fr', 'seance_fr')) {
+	# Concatenate the variable name with and indicator for the week (e.g. 'entree_paris1').
+	variable_t <- paste(c(variable, toString(i+1)), collapse='')
+	# For each week, the variable in the new df (e.g. 'entree_paris') is taken from the old df (e.g. 'entree_paris1').
+	df[df$t==i, variable] <- fr_df[,variable_t]
+	}
+	}
+	
+	# Keep only the useful variables.
+	df <- df[,c(1:6, 33:43, 70:85)]
+	
+	# Replace the NAs in seance_fr with zeros.
+	df[is.na(df$seance_fr), 'seance_fr'] <- 0
+	
+	# Generate logarithm of sales and screens.
+	df$log_entree_paris <- log(df$entree_paris + 1)
+	df$log_seance_paris <- log(df$seance_paris + 1)
+	df$log_entree_fr <- log(df$entree_fr + 1)
+	df$log_seance_fr <- log(df$seance_fr + 1)
+	
+	# Variable id_distributeur is a factor.
+	df$id_distributeur <- as.factor(df$id_distributeur)
+	
+	# Variable id is a factor (this is used for movie dummies with the package lfe).
+	df$X <- as.factor(df$X)
+	df$X.eff <- rnorm(nlevels(df$X))
+	
+\end{lstlisting}
+\end{appendices}
+
 
 
 \end{document}
