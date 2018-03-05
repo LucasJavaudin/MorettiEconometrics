@@ -1,4 +1,4 @@
-Moretti affirme dans le papier supprimer les films qui n'ont ouvert qu'à NY et LA.
+﻿Moretti affirme dans le papier supprimer les films qui n'ont ouvert qu'à NY et LA.
 Dans le code, il supprime en fait les films où le taux de croissance du nombre de salles de la première à la deuxième semaine est supérieur à 5, sans plus d'explications.
 Si l'on effectue les régressions en gardant ces films, les résultats restent quasiment identiques.
 
@@ -26,7 +26,8 @@ Avec les données fr, on peut ajouter de nouvelles variables de contrôle pour l
 Pour les régressions fr, les coefficients des triples régressions ont le signe attendu et sont souvent significatifs (exception: var_surprise pour la France).
 
 On peut penser que la précision du prior est plus faible pour les films d'arts et essai car on a du mal à juger de la qualité du film avant de le voir.
-Une autre interprétation aurait été de dire que les films d'arts et essai concernent un public plus restreint et donc le social network serait plus faible.
+
+%Une autre interprétation aurait été de dire que les films d'arts et essai concernent un public plus restreint et donc le social network serait plus faible.
 Les régressions semble valider la première interprétation car le coefficient est positif.
 
 Idem, les films hors d'Europe et des États-Unis ont un prior moins précis.
