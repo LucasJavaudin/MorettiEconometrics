@@ -170,6 +170,8 @@ variance <- 4 * ( varcov_matrix[2, 2] + varcov_matrix[4, 4] + 2*varcov_matrix[2,
 statistics <- 2 * (coeff[2] + coeff[4]) / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_pos <- pnorm(statistics)
+print(paste('value of the statistics for the concavity test:', statistics))
+print(paste('p-value of the concavity test:', pvalue_pos))
 
 # Test the hypothesis 2 t^2 > 0 (decline of negative surprise movies should be convex).
 # Compute the variance of 2 t^2.
@@ -178,6 +180,8 @@ variance <- varcov_matrix[2, 2]
 statistics <- coeff[2] / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_neg <- pnorm(-statistics)
+print(paste('value of the statistics for the convexity test:', statistics))
+print(paste('p-value of the convexity test:', pvalue_neg))
 
 ###########
 #  Graph  #
@@ -385,6 +389,8 @@ variance <- 4 * ( varcov_matrix[2, 2] + varcov_matrix[4, 4] + 2*varcov_matrix[2,
 statistics <- 2 * (coeff[2] + coeff[4]) / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_pos <- pnorm(statistics)
+print(paste('value of the statistics for the concavity test:', statistics))
+print(paste('p-value of the concavity test:', pvalue_pos))
 
 # Test the hypothesis 2 t^2 > 0 (decline of negative surprise movies should be convex).
 # Compute the variance of 2 t^2.
@@ -393,6 +399,8 @@ variance <- varcov_matrix[2, 2]
 statistics <- coeff[2] / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_neg <- pnorm(-statistics)
+print(paste('value of the statistics for the convexity test:', statistics))
+print(paste('p-value of the convexity test:', pvalue_neg))
 
 ###########
 #  Graph  #
