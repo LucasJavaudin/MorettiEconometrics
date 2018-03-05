@@ -1,9 +1,41 @@
 \subsection{Size of the Social Network}\label{subsec2.4}
 
 Consumers with a larger social network receive more feedbacks from their peers and thus they are able to evaluate more precisely the quality of the movie.
-%More formally, this prediction can be tested by estimating the following model:
-%\[ \ln y_{jt}  = \beta_0 + \beta_1 t + \beta_2 (t \times S_j) + \beta_3 (t \times \text{network\_size}_j) + \beta_4 (t \times S_j \times \text{network\_size}_j) + d_j + u_{jt} \]
-%where $\text{network\_size}_j$ is a variable correlated with the network size of the people 
+Hence, social learning should be stronger for consumers with a larger social network.
+More formally, this prediction can be tested by estimating the models of the form:
+\begin{equation}
+	\ln (y_{jt})  = \beta_0 + \beta_1 t + \beta_2 (t \times S_j) + \beta_3 (t \times NS_j) + \beta_4 (t \times S_j \times NS_j) + d_j + u_{jt}
+	\label{eqpred3}
+\end{equation}
+where $S_j$ is a dummy for positive surprise and $NS_j$ is a variable representing the network size of the movie $j$'s audience.
+If social learning is stronger with higher values of $NS_j$, then the coefficient $\beta_4$ of the triple interaction between the time trend, the surprise and the network size should be positive.
+
+In his article, Moretti uses two different measurement of network size.
+First, he makes the assumption that teenagers have a more developed social network than adults and he estimates the model of equation \ref{eqpred3} with a dummy for teen movies.
+He finds that the estimate of the coefficient $\beta_4$ is indeed positive.
+However, the estimate is very weakly significant.
+Additionally, there is no indicator for teen movies in the data and the way Moretti build a dummy for teen movies is quite surprising.
+He uses \textit{genre1} (one of the three variables indicating the genre of the movies) and he considers that teen movies are movies of the genre action, adventure, comedy, fantasy, horror, sci-fi and suspense.
+We would have appreciated more justification for the assumption that teenagers have a larger social network and for the way teen movies are defined.
+To investigate further these issues, we used the two other variables indicating the genre of the movies: \textit{genre2} and \textit{genre3}.
+Both variables have a category \textit{Children} and a category \textit{Youth}.
+We used these two categories to define new dummies for teen movies.
+Using \textit{genre2}, we find that the estimate of $\beta_4$ is significantly negative.
+Using \textit{genre3}, we find that the estimate of $\beta_4$ is significantly positive.
+We conclude that using teen movies is not a good way to test this prediction.
+
+A second measurement of the size of the social network used by Moretti is the number of theaters broadcasting the movie during the opening week.
+If a movie opens in lots of theater, the consumers should receive more feedbacks from their peers.
+As expected, he estimates that the coefficient of $\beta_4$ is significantly positive.
+We estimated the same model with the French data.
+The results are reported in column (2) of table \ref{precisionsignal}.
+We find that the coefficient of the triple interaction is indeed significantly positive.
+
+In the French data, the variable \textit{tout public} is a dummy indicating movies which are suitable for any kind of audience.
+We can assume that consumers have more feedbacks from their peers for movies opened to anyone.
+Hence, we estimated the model of equation \ref{eqpred3} using the \textit{tout public} dummy to measure network size.
+The results of the estimated are reported in column (1) of table \ref{precisionsignal}.
+Consistently with our assumption, the coefficient of the triple interaction is significantly positive.
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Fri, Mar 02, 2018 - 05:12:24 PM
@@ -53,26 +85,30 @@ More precisely, sales profile should be a concave function of time for positive 
 To test this prediction, we need to estimate the sales profile which is assumed to be a quadratic function of time.
 Therefore, we estimate the following model:
 \begin{equation*}
-	\ln y_{jt} = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 (t \times \text{positive\_surprise}) + \beta_4 (t^2 \times \text{positive\_surprise}) + d_j + u_{jt}.
+	\ln (y_{jt}) = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 (t \times S_j) + \beta_4 (t^2 \times S_j) + d_j + u_{jt}
 \end{equation*}
+where $S_j$ is a dummy for positive surprise.
 The results are reported in table \ref{pred4}.
 The second derivative of log of entries for negative-surprise movies is 
 \begin{equation*}
-	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{\text{postive\_surprise=0}} = 2 \beta_2.
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=0}} = 2 \beta_2.
 \end{equation*}
 The second derivative of log of entries for positive-surprise movies is 
 \begin{equation*}
-	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{\text{postive\_surprise=1}} = 2 (\beta_2 + \beta_4).
+	\left.\frac{\partial^2 y_{jt}}{\partial t^2}\right|_{S_j=1}} = 2 (\beta_2 + \beta_4).
 \end{equation*}
 We can test the hypothesis of convexity ($2\beta_2 > 0$) and the hypothesis of concavity ($2(\beta_2 + \beta_4) < 0$) with Student tests.
 For instance, to test $H_0:~2(\beta_2 + \beta_4) < 0$ against $H_1:~2(\beta_2 + \beta_4) > 0$, the $t$ statistic is
 \begin{equation*}
-	t = \frac{2(\hat{\beta}_2 + \hat{\beta}_4)}{\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4))} .
+	t = \frac{2(\hat{\beta}_2 + \hat{\beta}_4)}{\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4))} 
 \end{equation*}
+where $\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4)) = 2[{\text{Var}(\hat{\beta}_2) + \text{Var}(\hat{\beta}_4) + 2\cdot \text{Cov}(\hat{\beta}_2, \hat{\beta}_4)]^{1/2}$ is the standard error of $2(\hat{\beta}_2 + \hat{\beta}_4)$.
+
 With the US data, both hypotheses cannot be rejected with a good confidence.
-With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0. 
-However, the hypothesis of concavity of positive-surprise movies must be rejected ($p$-value = 1).
-What we can say however is that the sales profile of positive-surprise movies is "more concave" than the sales profile of negative-surprise movies because the estimates show that the coefficient $\beta_4$ is significantly negative.
+With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0 ($t \approx 36.72$ and $p \approx 0$). 
+However, the hypothesis of concavity of positive-surprise movies must be rejected ($t \approx 9.41$ and $p \approx 1$).
+What we can say however is that the sales profile of positive-surprise movies is \textit{more concave} than the sales profile of negative-surprise movies because the estimates show that the coefficient $\beta_4$ is significantly negative.
+These statements are confirmed by the graphs of the sales profile of figure \ref{part2.1_plot_moretti} where the sales profile of negative-surprise movies is clearly convex and the sales profile of positive-surprise movies seems linear.
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Fri, Mar 02, 2018 - 05:12:25 PM
