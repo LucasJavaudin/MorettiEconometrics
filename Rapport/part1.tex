@@ -1,153 +1,174 @@
-Moretti develops a model that defines social learning as the effect of one consumer's opinion on a given good's consumption, on her acquaitancies's willingness to consume.\\
-Applied to cinema, his idea is that comsumers go and see a certain film if they get a sufficient expected utiliy to compensate the cost of viewing.\\
-\subsection{Utility Estimation Before A Movie Is Released}	
-\subsubsection{Actual Utility}
-The utility provided by a given film (called "quality") is estimated by the consumers before the movie is being launched. They use the the objective elements about the film, available to them all, to get a \textit{prior}. Consumers also get a personal \textit{signal} that indicates how much they are attracted by the film's concept.\\
-\\
-Expected utility is the weighted average of the prior and the signal. Progressively, the acquaintancies' opinion on the film is also included in this weighted average. \\
-\\
-An individual i gets a utility $U_{i,j}$ watching the film j with\\
-\begin{equation} \label{eq:1}
+	\fbox{\begin{minipage}{1\textwidth}
+			Moretti develops a model that defines social learning as the effect of one consumer's opinion on a given good's consumption, on her acquaitancies's willingness to consume.\\
+			Applied to cinema, his idea is that comsumers go and see a certain film if they get a sufficient expected utiliy to compensate the cost of viewing.
+	\end{minipage}}\\
+	\subsection{Utility Estimation Before A Movie Is Released}	
+	\subsubsection{Actual Utility}
+	\fbox{\begin{minipage}{1\textwidth}
+			The utility provided by a given film (called "quality") is estimated by the consumers before the movie is being launched. They use the the objective elements about the film, available to them all, to get a \textit{prior}. Consumers also get a personal \textit{signal} that indicates how much they are attracted by the film's concept.\\
+			Movie theatres only get a prior, and estimate the appeal for the film from it. They are profit-maximizing firms, so they are incentivized to choose the number of screens for a given film following the prior.\\
+	\end{minipage}}\\
+	 \\
+	\\
+	An individual i gets a utility $U_{i,j}$ watching the film j with\\
+	\begin{equation} \label{eq:1}
 	U_{i,j}=\alpha_{j}^{*}+v_{i j},
-\end{equation}
-where $\alpha_{j}^{*}$ is the quality of the movie for the average individual and $v_{i j}\sim \mathcal{N}(0,\frac{1}{d})$ represents how much individual i's appeal for movie j differs from the the average individual's taste for this movie (that is the reason why the variable $v_{i j}$ is zero-mean).\\
-\\
-It is worth noticing that $v_{i j}$'s variance is independant of both i and j: the distribution of the tastes aroung the mean is supposed to be constant (in absolute value) no matter the film.\\
-\\
-These two parameters are supposed to be unobserved. This is consistent for $\alpha_{j}^{*}$ as an individual may find it hard to estimate precisely the advice of the \textit{average consumer}: she does not observe all advices, thus cannot precisely determine the mean of all the tastes. So $\alpha_{j}^{*}$ can be considered as a random variable; to make the model rather simple, this variable is supposed to be normal, i.e. totally characterized by its mean and variance.\\
-\\
-This variable's mean (referred to precedently as the prior) can be estimated from all the observable features of the film (such as the director, the budget, the casting...), that are aggregated into the variable $X_{j}$. Thus, $\mathbb{E}(\alpha_{j}^{*})=X_{j}'\beta$, like in a simple linear model. This expression embodies one of Moretti's key ideas in his paper, that a film's quality is the only determiner of the utility if we omit interpersonal differences in tastes.\\
-$\alpha_{j}^{*}$'s variance does not depend on the individual doing the estimation (all individual are supposed to have the same information about the film and to analyse it the same way). Nevertheless, it depends on the movie. Sequels and films shot by famous directors are characterised by a much lower variance since the precedent movies'outcome (success or failure) could be observed.\\
-Thus: $\alpha_{j}^{*}\sim \mathcal{N}(X_{j}'\beta,\frac{1}{m_{j}})$\\
+	\end{equation}
+	where $\alpha_{j}^{*}$ is the quality of the movie for the average individual and $v_{i j}\sim \mathcal{N}(0,\frac{1}{d})$ represents how much individual i's appeal for movie j differs from the the average individual's taste for this movie (that is the reason why the variable $v_{i j}$ is zero-mean).\\
+	\\
+	It is worth noticing that $v_{i j}$'s variance is independant of both i and j: the distribution of the tastes aroung the mean is supposed to be constant (in absolute value) no matter the film.\\
+	\\
+	These two parameters are supposed to be unobserved. This is consistent for $\alpha_{j}^{*}$ as an individual may find it hard to estimate precisely the advice of the \textit{average consumer}: she does not observe all advices, thus cannot precisely determine the mean of all the tastes. So $\alpha_{j}^{*}$ can be considered as a random variable; to make the model rather simple, this variable is supposed to be normal, i.e. totally characterized by its mean and variance.\\
+	\\
+	This variable's mean (referred to precedently as the prior) can be estimated from all the observable features of the film (such as the director, the budget, the casting...), that are aggregated into the variable $X_{j}$. Thus, $\mathbb{E}(\alpha_{j}^{*})=X_{j}'\beta$, like in a simple linear model. This expression embodies one of Moretti's key ideas in his paper, that a film's quality is the only determiner of the utility if we omit interpersonal differences in tastes.\\
+	$\alpha_{j}^{*}$'s variance does not depend on the individual doing the estimation (all individual are supposed to have the same information about the film and to analyse it the same way). Nevertheless, it depends on the movie. Sequels and films shot by famous directors are characterised by a much lower variance since the precedent movies'outcome (success or failure) could be observed.\\
+	Thus: $\alpha_{j}^{*}\sim \mathcal{N}(X_{j}'\beta,\frac{1}{m_{j}})$\\
 	
-\subsubsection{Signal: Noisy Utility}
-Moretti suposes that consumers don't measure $u_{i,j}$ but recieves instead a noisy signal
-\begin{equation*}
+	\subsubsection{Signal: Noisy Utility}
+	\fbox{\begin{minipage}{1\textwidth}
+	Moretti suposes that consumers don't measure the utility $U_{i,j}$ he could get by watching the film, but recieves instead a noisy signal
+	\end{minipage}}\\
+	\begin{equation*}
 	s_{i j}=U_{i j}+\epsilon_{i j}, \;\epsilon_{i j}\sim \mathcal{N}(0,\frac{1}{k_{j}}).
-\end{equation*}
-Introducing an unbiased signal allows that the averages of s and U are the same for a certain movie j, which is a basic requirement in a social learning model (aggregated signal gives an unbiased estimator). Additionnaly, for a set of movies that give the same utility to a given consumer and that have the same variance for $\epsilon_{i j}$, the consumer makes on average correct predictions of her utility starting from the signal she gets. \\
-$\epsilon_{i j}$ and $v_{i j}$ are also supposed independant of each other and of $\alpha_{j}^{*}$; the idea is that the objective quality of the film, the subjective appeal for it and the error in measuring these values aren't correlated, since they are of different nature.\\
-It is worth noticing, in that sense, that the three variables introduced above are all considered as random, but in different senses. For  $\alpha_{j}^{*}$ it can be interpreted as a lack of sufficient information to estimate $\beta$ correctly. For $v_{i j}$ the probability distribution allows to consider a set of different individuals with different tastes. $\epsilon_{i j}$ is rather an error of interpretation (or, more mathematically, of measurement) during the determining of $U_{i j}$\\\\
-Additionaly we suppose that $X_{j}$, $\beta$, $m_{j}$, $k_{j}$ and d are well-known by all the consumers.
-\\
-\subsubsection{Expected Utiliy}
-As said above, the exprected utiliy in the first week (i.e. before the film is being released) is estimated by the weighted average of the prior and the signal, namely:
-\begin{center}
-	$\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}$.
-\end{center}
-The idea is to use to different estimators of $U_{i j}$: its estimated average value (which is certain) and its value with some zero-mean noise (which cumulates several uncertainties).\\
-The expression of the variance has to put more weight on the most precise term between the two estimators of $U_{i j}$; we want to know whether it is better \\
-- to omit widely the personal part $v_{i j}$ (of variance $\frac{1}{d})$) and the error in estimating the average value $\alpha_{j}^{*}$ (of variance $\frac{1}{m_{j}})$), i.e. to put more weight on $X_{j}'\beta$,\\
-- or to cope with noise $\epsilon_{i j}$ (of variance $\frac{1}{k_{j}}$), i.e. to put more weight on $s_{i j}$.\\
-\\
-Like in the WLS approach, we minimize the exprected value of the square difference between the right-hand side above, and the sought term $U_{i j}$, choosing the optimal $\omega_{j}$, i.e. :
-\begin{center}
-	$\min_{\omega_{j}} \mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^{2})=\min_{\omega_{j}} \mathbb{E}((-\omega_{j} (\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})\epsilon_{i j})^{2})$.
-\end{center}
-The solution is, according to Appendix 1:
-\begin{center}
-	$\omega_{j}(\frac{1}{h_{j}}+\frac{1}{k_{j}})=\frac{1}{k_{j}}$
-	$\omega_j=\frac{h_{j}}{h_{j}+k_{j}}$.
-\end{center}
-with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$ ($h_{j}=Var(U_{i j})$ too)
-Thus:
-\begin{equation}
-\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}
-\end{equation}
-\\
-\subsubsection{Cost Of Watching}
-In the model, a consumer decides to go and watch a film if her utility is higher than her subjective cost of watching in the week considered (parameter t), depending for example on whether she has a lot or a few activities planned during the week: 
-\begin{equation}
+	\end{equation*}
+	Introducing an unbiased signal allows that the averages of s and U are the same for a certain movie j, which is a basic requirement in a social learning model (aggregated signal gives an unbiased estimator). Additionnaly, for a set of movies that give the same utility to a given consumer and that have the same variance for $\epsilon_{i j}$, the consumer makes on average correct predictions of her utility starting from the signal she gets. \\
+	$\epsilon_{i j}$ and $v_{i j}$ are also supposed independant of each other and of $\alpha_{j}^{*}$; the idea is that the objective quality of the film, the subjective appeal for it and the error in measuring these values aren't correlated, since they are of different nature.\\
+	It is worth noticing, in that sense, that the three variables introduced above are all considered as random, but in different senses. For  $\alpha_{j}^{*}$ it can be interpreted as a lack of sufficient information to estimate $\beta$ correctly. For $v_{i j}$ the probability distribution allows to consider a set of different individuals with different tastes. $\epsilon_{i j}$ is rather an error of interpretation (or, more mathematically, of measurement) during the determining of $U_{i j}$\\\\
+	Additionaly we suppose that $X_{j}$, $\beta$, $m_{j}$, $k_{j}$ and d are well-known by all the consumers.
+	\\
+	\subsubsection{Expected Utiliy}
+	\fbox{\begin{minipage}{1\textwidth}
+			The exprected utiliy in the first week (i.e. before the film is being released) is estimated by the weighted average of the prior and the signal:
+	\end{minipage}}\\
+	\begin{center}
+		$\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}$.
+	\end{center}
+	The idea is to use to different estimators of $U_{i j}$: its estimated average value (which is certain) and its value with some zero-mean noise (which cumulates several uncertainties).\\
+	The expression of the variance has to put more weight on the most precise term between the two estimators of $U_{i j}$; we want to know whether it is better \\
+	- to omit widely the personal part $v_{i j}$ (of variance $\frac{1}{d})$) and the error in estimating the average value $\alpha_{j}^{*}$ (of variance $\frac{1}{m_{j}})$), i.e. to put more weight on $X_{j}'\beta$,\\
+	- or to cope with noise $\epsilon_{i j}$ (of variance $\frac{1}{k_{j}}$), i.e. to put more weight on $s_{i j}$.\\
+	\\
+	Like in the WLS approach, we minimize the exprected value of the square difference between the right-hand side above, and the sought term $U_{i j}$, choosing the optimal $\omega_{j}$, i.e. :
+	\begin{center}
+		$\min_{\omega_{j}} \mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^{2})=\min_{\omega_{j}} \mathbb{E}((-\omega_{j} (\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})\epsilon_{i j})^{2})$.
+	\end{center}
+	The solution is, according to Appendix 1:
+	\begin{center}
+		$\omega_{j}(\frac{1}{h_{j}}+\frac{1}{k_{j}})=\frac{1}{k_{j}}$
+		$\omega_j=\frac{h_{j}}{h_{j}+k_{j}}$.
+	\end{center}
+	with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$ ($h_{j}=Var(U_{i j})$ too)
+	Thus:
+	\begin{equation}
+	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}
+	\end{equation}
+	\\
+	\subsubsection{Cost Of Watching}
+	\fbox{\begin{minipage}{1\textwidth}
+	In the model, a consumer decides to go and watch a film if her utility is higher than her subjective cost of watching in the week considered (parameter t), depending for example on whether she has a lot or a few activities planned during the week: 
+	\end{minipage}}\\
+	\begin{equation}
 	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]>q_{i t}
-\end{equation}
-To model the idea that the cost depends on the individual and on the week, Moretti supposes that $q_{i t}=q+u_{i t}$ with $u_{i j}\sim \mathcal{N}(0,\frac{1}{r})$ with all $u_{i t}$ independant. $u_{i t}$ is zero-mean so the cost of watching has the same average value (between individuals) every week, and the same average for a given individual during a long period of time. As a consequence, the consumers are considered similar; the stuctural difference of timetable between positions and jobs is not taken into account, or it is supposed not to influence the possibility to go to the movies.\\
-\\
-\subsubsection{Probability Of Watching}
-To finish with, let us compute the probability for individual i to go to see movie j in the first week. To do so, we will have to change the viewpoint, from the consumer deciding whether or not to see a movie, to an observer of the market looking at the result of consumer's decision at an aggregate level. The aim is to get a formula that is possible to use. More precisely, all variables with indexes 'i' won't be observable any more, but the average $\alpha_{j}^{*}$ is now obervable (thus precisely determined); this induces a certain form for the result. The sought probability of watching is in this context:
-\begin{equation} \label{eq:4}
+	\end{equation}
+	To model the idea that the cost depends on the individual and on the week, Moretti supposes that $q_{i t}=q+u_{i t}$ with $u_{i j}\sim \mathcal{N}(0,\frac{1}{r})$ with all $u_{i t}$ independant. $u_{i t}$ is zero-mean so the cost of watching has the same average value (between individuals) every week, and the same average for a given individual during a long period of time. As a consequence, the consumers are considered similar; the stuctural difference of timetable between positions and jobs is not taken into account, or it is supposed not to influence the possibility to go to the movies.\\
+	
+	\subsubsection{Probability Of Watching}
+	To finish with, let us compute the probability for individual i to go to see movie j in the first week. To do so, we will have to change the viewpoint, from the consumer deciding whether or not to see a movie, to an observer of the market looking at the result of consumer's decision at an aggregate level. The aim is to get a formula that is possible to use. More precisely, all variables with indexes 'i' won't be observable any more, but the average $\alpha_{j}^{*}$ is now obervable (thus precisely determined); this induces a certain form for the result. The sought probability of watching is in this context:
+	\begin{equation} \label{eq:4}
 	P_{1}=\mathbb{P}(\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]>q_{i t})=\Phi\left(\frac{(1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j 1}}\right),
-\end{equation}
-\begin{align*}
+	\end{equation}
+	\begin{align*}
 	\sigma_{j 1}^{2}=(1-\omega_{j})^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{1}{r}
-\end{align*}
-with $\Phi$ is the cumulative function of a standard normal distribution $\mathcal{N}(0,1)$
-Moretti underlines that the term $\alpha_{j}^{*}-X_{j}'\beta$ that appears in the previous equation measures the surprise. It is indeed the difference between\\
-- the 'true quality' of the movie $\alpha_{j}^{*}$, in the sense of average utility that consumers get by viewing the film, that only the observer of the market sees, and\\
-- $X_{j}'\beta$, the prior of quality, which is the only piece of information movie theatres have and one of the only two consumers have to estimate the quality of the movie. The observer of the market can also see it.\\
-\\
-The expression 'surprise' is justified by the fact that a positive difference $\alpha_{j}^{*}-X_{j}'\beta$ increases the probability of watching and conversely. The presence of this term is justified by the fact that\\
-- movie theatres have less information than consumers\\
-- both information consumers recieve are unbiased\\
-- consumers are numerous and thus, on average, the utility they expect is close to the true utility (or quality) $\alpha_{j}^{*}$, which is totally determined by the consumer's appeal for the film.\\
-\\
-With neither social learning, nor decrease in utility for viewing a film again and again, the previous formula for $P_{1}$ remains valid as long as the movie can be watched.\\
+	\end{align*}
+	with $\Phi$ is the cumulative function of a standard normal distribution $\mathcal{N}(0,1)$.\\
+	\fbox{\begin{minipage}{1\textwidth}
+	Moretti underlines that the term $\alpha_{j}^{*}-X_{j}'\beta$ that appears in the previous equation measures the \textit{surprise}. It is indeed the difference between\\
+	- the 'true quality' of the movie $\alpha_{j}^{*}$, in the sense of average utility that consumers get by viewing the film, that only the observer of the market sees, and\\
+	- $X_{j}'\beta$, the prior of quality, which is the only piece of information movie theatres have and one of the only two consumers have to estimate the quality of the movie. The observer of the market can also see it.\\
+	\\
+	We note that that in the first week a positive difference $\alpha_{j}^{*}-X_{j}'\beta>0$ increases the probability of watching and conversely. The presence of this term is justified by the fact that\\
+	- movie theatres have less information than consumers\\
+	- both information consumers recieve are unbiased\\
+	- consumers are numerous and thus, on average, the utility they expect is close to the true utility (or quality) $\alpha_{j}^{*}$, which is totally determined by the consumer's appeal for the film.
+	\end{minipage}}\\
+	\\
+	With neither social learning, nor decrease in utility for viewing a film again and again, the previous formula for $P_{1}$ remains valid as long as the movie can be watched.\\
 	
-\subsection{Utility Estimation With Social Learning}	
+	\subsection{Utility Estimation With Social Learning}	
 	
-\subsubsection{Signal With Feedback}
-Let us add social learning in the model now. In week 2, we consider a consumer i who has $N_{i}$ peers, $n_{i}$ of which see the movie in Week 1. They all give their utiliy $U_{p j }$, $p\in[1,n_{i}]$ as a feedback to i after watching. Consumer i recieves two information in the same time:\\
-- the fact that his acquaintancies who saw the film had a sufficiently high expected (ex-ante) utility to do so, i.e.:
-\begin{align*}
-	\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{p j}>q_{p 1},
-\end{align*}
-and that the $N_{i}-n_{i}$ other peers did not verify such inequality.\\
-- and their ex-post utility itself.\\\\
-By maximum likelihood estimation we obtain an estimate $S_{i j 2}$ such that (see Appendix 3):
-\begin{equation}
+	\subsubsection{Signal With Feedback}
+	\fbox{\begin{minipage}{1\textwidth}
+	Let us add social learning in the model now. In week 2, we consider a consumer i who has $N_{i}$ peers, $n_{i}$ of which see the movie in Week 1. They all give their utiliy $U_{p j }$, $p\in[1,n_{i}]$ as a feedback to i after watching. Consumer i recieves two information in the same time:\\
+	- the fact that his acquaintancies who saw the film had a sufficiently high expected (ex-ante) utility to do so, i.e. $\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{p j}>q_{p 1}$, and that the $N_{i}-n_{i}$ other peers did not verify such inequality.\\
+	- and their ex-post utility itself.
+	\end{minipage}}\\\\
+
+	By maximum likelihood estimation we obtain an estimate $S_{i j 2}$ such that (see Appendix 3):
+	\begin{equation}
 	S_{i j 2}=\frac{1}{n_{i}}\sum_{p=1}^{n_{i}}U_{p j}-\frac{1-\omega_{j}}{d\sigma_{V}}\frac{N_{i}-n_{i}}{n_{i}}\frac{\phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})S_{i j 2}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})S_{i j 2}}{\sigma_{V}}\right)}\\
-\end{equation}
+	\end{equation}
 	
-The second part of the expression is negative so that $S_{i j 2}$ is lower than the average of the ex-post utilities consumer i recieves; this is the impact of non-viewers.\\
+	The second part of the expression is negative so that $S_{i j 2}$ is lower than the average of the ex-post utilities consumer i recieves; this is the impact of non-viewers.\\
 	
-Moretti underlines that the estimator obtained is unbiased and asymptotically normal (this second property comes from the fact that the estimator is a likelihood maximizer): 
-\begin{equation}
+	Moretti underlines that the estimator obtained is unbiased and asymptotically normal (this second property comes from the fact that the estimator is a likelihood maximizer): 
+	\begin{equation}
 	S_{i j 2}\sim\mathcal{N}(\alpha_{j}^{*}, \frac{1}{b_{i 2}}) , b_{i 2}=dn_{i}+(N_{i}-n_{i})\frac{\phi(c)}{\Phi(c)}\left(c+\frac{\phi(c)}{\Phi(c)}\right)(\frac{1-\omega_{j}}{\sigma_{V}})^{2}
-\end{equation}\\
+	\end{equation}\\
 	
-\subsubsection{Expected Utility}
-Consumer i will do a weighted average of the three information she has, $X_{j}'\beta, s_{i j}$ and $S_{i j 2}$, just like in the first week:
-\begin{equation}
+	\subsubsection{Expected Utility}
+	Progressively, the acquaintancies' opinion on the film is also included in this weighted average.
+	Consumer i will do a weighted average of the three information she has, $X_{j}'\beta, s_{i j}$ and $S_{i j 2}$, just like in the first week:
+	\begin{equation}
 	\mathbb{E}_2[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}]=\frac{h_{j}}{h_{j}+k_{j}+z_{i 2}} X_{j}'\beta+\frac{k_{j}}{h_{j}+k_{j}+z_{i 2}}s_{i j}+\frac{z_{i 2}}{h_{j}+k_{j}+z_{i 2}}S_{i j 2}, 
-\end{equation}
-\begin{align*}
+	\end{equation}
+	\begin{align*}
 	h_{j}=\frac{d m_{j}}{d+m_{j}}, z_{i 2}=\frac{b_{i 2}d}{b_{i 2}+d}.
-\end{align*}
-Likewise, in week $t\geqslant2$, the exprected utility is
-\begin{align*}
+	\end{align*}
+	Likewise, in week $t\geqslant2$, the exprected utility is
+	\begin{align*}
 	\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]=\frac{h_{j}X_{j}'\beta}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}} +\frac{k_{j}s_{i j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}+\sum_{w=2}^{t}\frac{z_{i w}S_{i j 2}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, 
-\end{align*}
-\begin{equation}
+	\end{align*}
+	\begin{equation}
 	\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]=\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}s_{i j}+\sum_{w=2}^{t}\omega_{j 3 w}S_{i j w}, 
-\end{equation}
-\begin{align*}
+	\end{equation}
+	\begin{align*}
 	\omega_{j 1 t}=\frac{h_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, 
 	\omega_{j 2 t}=\frac{k_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, 
 	\omega_{j 3 w}=\frac{z_{i w}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}},\\
 	h_{j}=\frac{d m_{j}}{d+m_{j}}, z_{i t}=\frac{b_{i t}d}{b_{i t}+d}.
-\end{align*}
+	\end{align*}
 	
-This equation shows that a given piece of information has a decreasing importance in the final decision from week to week.\\
+	This equation shows that a given piece of information has a decreasing importance in the final decision from week to week.
 	
-\subsubsection{Probability of Watching}
-Just like before, the probability of watching at week t is (see Appendix 4):
-\begin{align*}
+	\subsubsection{Probability of Watching}
+	Just like before, the probability of watching at week t is (see Appendix 4):
+	\begin{align*}
 	P_{t}&=\mathbb{P}(\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]>q_{i t})\\
 	&=\Phi\left(\frac{(1-\omega_{j 1 t})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j t}}\right),
-\end{align*}
-with:
-\begin{align*}
+	\end{align*}
+	with:
+	\begin{align*}
 	\sigma_{j t}^{2}
 	&=(\omega_{j 2 t })^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{\sum_{p=2}^{t}z_{i p}}{(h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s})^{2}}+\frac{1}{r}
-\end{align*}
+	\end{align*}
 	
-To analyze this equation we can consider first the case $X_{j}'=\alpha_{j}^{*}$ (no surprise). Then $P_{t}=\Phi\left(\frac{X_{j}'\beta-q}{\sigma_{j t}}\right)$: the higher the difference between the prior and the average cost (average for every week and/or every consumer), the higher the probability for a viewer to watch the film, and thus the higher the attendance to see the movie considered. The probability of viewing is constant equal to one-half when $X_{j}'\beta=q$.\\
-To study the evolution over time we can derivate (discretely) $P_{t}$ two times w.r.t t. When $X'\beta=q$, we obtain (in Appendix 5) a consistent model, as announced by Moretti, if some condition is verified by the parameters ($h_{j}<k_{j}$ or $h_{j}<\frac{2k_{j}^{2}}{d}$ is sufficient): if we have a positive surprise, i.e. $\alpha_{j}^{*}>X_{j}'\beta$, the the probability of going to watch the film is increasing from one week to the following, whereas a negative surprise $\alpha_{j}^{*}<X_{j}'\beta$ leads to a decrease in this probability across the weeks. Additionaly, without any surprise, i.e. $\alpha_{j}^{*}=X_{j}'\beta$, the probability of watching in constant over time.\\
-Moretti underlines that the second derivative has the opposite sign from the first derivative, meaning that:
-\begin{center}
-	$\frac{\partial ^{2} P_{t}}{\partial t^{2}}<0$ (concavity) when $\alpha_{j}^{*}>X_{j}'\beta$ and $\frac{\partial ^{2} P_{t}}{\partial t^{2}}>0$ (convexity) when $\alpha_{j}^{*}<X_{j}'\beta$.
-\end{center}
-The concavity or convexity is the mark of a social learning multiplier: from one week to another, the quality becomes more and more precisely known, additional advice from peers bring marginally less and less information from one week to another.\\
-If we relax the hypothesis $X'\beta=q$, the same tendancies are observed but with a threshold. Considering again the sufficient conditions above, when $X'\beta>q$, the prior on quality of the movie exceeds the cost of viewing, so the impact of a negative surprise on the probability of watching the film is lower. This is due to the fact that people, in that case, are to perform a trade-off between a strongly positive prior and a negative surprise. We have a symetric situation when $X'\beta<q$ and people's signal shows a negative surprise.
+	To analyze this equation we can consider first the case $X_{j}'=\alpha_{j}^{*}$ (no surprise). Then $P_{t}=\Phi\left(\frac{X_{j}'\beta-q}{\sigma_{j t}}\right)$: the higher the difference between the prior and the average cost (average for every week and/or every consumer), the higher the probability for a viewer to watch the film, and thus the higher the attendance to see the movie considered. The probability of viewing is constant equal to one-half when $X_{j}'\beta=q$.\\
+	To study the evolution over time we can derivate (discretely) $P_{t}$ two times w.r.t t (see Appendix 5).\\\\
+	\fbox{\begin{minipage}{1\textwidth}
+		When $X'\beta=q$, we obtain a consistent model, as announced by Moretti, if some condition is verified by the parameters ($h_{j}<k_{j}$ or $h_{j}<\frac{2k_{j}^{2}}{d}$ is sufficient):\\
+		if we have a positive surprise, i.e. $\alpha_{j}^{*}>X_{j}'\beta$, the probability of going to watch the film is increasing from one week to the following, whereas a negative surprise $\alpha_{j}^{*}<X_{j}'\beta$ leads to a decrease in this probability across the weeks. Additionaly, without any surprise, i.e. $\alpha_{j}^{*}=X_{j}'\beta$, the probability of watching in constant over time.
+	\end{minipage}}\\\\
+
+	Moretti underlines that the second derivative has the opposite sign from the first derivative, meaning that:
+	\begin{center}
+		$\frac{\partial ^{2} P_{t}}{\partial t^{2}}<0$ (concavity) when $\alpha_{j}^{*}>X_{j}'\beta$ and $\frac{\partial ^{2} P_{t}}{\partial t^{2}}>0$ (convexity) when $\alpha_{j}^{*}<X_{j}'\beta$.
+	\end{center}
+	\fbox{\begin{minipage}{1\textwidth}
+	The concavity or convexity is the mark of a social learning multiplier: from one week to another, the quality becomes more and more precisely known, additional advice from peers bring marginally less and less information from one week to another.
+	\end{minipage}}\\\\
+	If we relax the hypothesis $X'\beta=q$, the same tendancies are observed but with a threshold. Considering again the sufficient conditions above, when $X'\beta>q$, the prior on quality of the movie exceeds the cost of viewing, so the impact of a negative surprise on the probability of watching the film is lower. This is due to the fact that people, in that case, are to perform a trade-off between a strongly positive prior and a negative surprise. We have a symetric situation when $X'\beta<q$ and people's signal shows a negative surprise.
 	
-\subsubsection{Ruling Out Nework Externalities}
-Moretti wants to show a social learning effect and to rule out a network externality effect. The latter is present when a consumer has a utility that depends only on the number of people who have watched the film (for example, so as to speak with them about the film). The theory he develops models the idea that the evolution in sales is due to the process of estimation of a movie's quality, and not merely on the attendance for a given movie.
+	\subsubsection{Ruling Out Nework Externalities}
+	\fbox{\begin{minipage}{1\textwidth}
+	Moretti wants to show a social learning effect and to rule out a network externality effect. The latter is present when a consumer has a utility that depends only on the number of people who have watched the film (for example, so as to speak with them about the film). The theory he develops models the idea that the evolution in sales is due to the process of estimation of a movie's quality, and not merely on the attendance for a given movie.
+	\end{minipage}}\\
