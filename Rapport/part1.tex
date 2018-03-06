@@ -48,29 +48,12 @@
 	\begin{center}
 		$\min_{\omega_{j}} \mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^{2})=\min_{\omega_{j}} \mathbb{E}((-\omega_{j} (\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})\epsilon_{i j})^{2})$.
 	\end{center}
-	By independance of the different random variable studied, and linearity of the expected value:
-	\begin{align*}
-	\mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^2)&=\omega_{j}^{2}\mathbb{E}((\alpha_{j}^{*}-X_{j}'\beta+v_{i j})^{2})+(1-\omega_{j})^{2}\mathbb{E}((\epsilon_{i j})^{2})\\
-	&=\omega_{j}^{2}Var(\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})^{2}Var(\epsilon_{i j}),
-	\end{align*}
-	since all the variables considered here are zero-mean (the expectation of their square value is thus their variance). Hence:
-	\begin{align*}
-	\mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^2)&=\omega_{j}^{2}(Var(\alpha_{j}^{*}-X_{j}'\beta)+Var(v_{i j}))+(1-\omega_{j})^{2}Var(\epsilon_{i j})\\
-	&=\omega_{j}^{2}\left(\frac{1}{m_{j}}+\frac{1}{d}\right)+(1-\omega_{j})^{2}\frac{1}{k_{j}}.
-	\end{align*}
-	The problem to solve is thus
-	\begin{center}
-		$\min_{\omega_{j}} \omega_{j}^{2}(\frac{1}{m_{j}}+\frac{1}{d})+(1-\omega_{j})^{2}\frac{1}{k_{j}}$.
-	\end{center}
-	The first-order condition w.r.t $\omega_{j}$ is 
-	\begin{center}
-		$2\omega_{j}(\frac{1}{m_{j}}+\frac{1}{d})-2(1-\omega_{j})\frac{1}{k_{j}}=0$.
-	\end{center}
-	so, with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$ ($h_{j}=Var(U_{i j})$ too), we can rewrite:
+	The solution is:
 	\begin{center}
 		$\omega_{j}(\frac{1}{h_{j}}+\frac{1}{k_{j}})=\frac{1}{k_{j}}$
 		$\omega_j=\frac{h_{j}}{h_{j}+k_{j}}$.
 	\end{center}
+	with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$ ($h_{j}=Var(U_{i j})$ too)
 	Thus:
 	\begin{equation}
 	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}
