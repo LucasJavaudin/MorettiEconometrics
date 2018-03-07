@@ -14,7 +14,6 @@ Moretti's purpose is to provide evidence of social learning in consumption, that
 	\item we should not observe social learning effects when a surprise is due to elements other than quality of the film (let say weather).
 \end{enumerate}
 We have replicated Moretti's work and tried to confront his predictions with French data.
-\pagebreak
 \subsection{Identification of the surprises}\label{subsec2.1}
 
 Surprises consist in the residuals of the regression of the log-number of sales in the first week on the log-number of screens available (opened by theaters). This definition of surprises holds because we suppose that theaters are profit-maximizing agents and make use of all the available information to predict the success of a movie. If this definition is correct, we should expect log-number of screens opened by theaters first week to be a good indicator of knowledge available on the movie quality before it is released. In the Table \ref{part2.1_tab1} we reproduce Moretti's regression of \textit{log\_sales\_first\_we} on \textit{log\_screens\_first\_week}. Each column is the result of the regression when we control with some variables (film genre, rating available, cost, distributor, weekday, month, week, year). The fact that adding control variables doesn't change the robustness of the regression proves Moretti's point which is that theaters take into account these factors when deciding their number of available screens. 
@@ -22,7 +21,7 @@ Surprises consist in the residuals of the regression of the log-number of sales 
 \begin{table}[!htbp] \centering 
 	\caption{Regression of first-weekend sales on number of screens} 
 	\label{part2.1_tab1} 
-	\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+	\begin{tabular}{@{\extracolsep{0pt}}lccccccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
 		& \multicolumn{7}{c}{\textit{Dependent variable:}} \\ 
@@ -32,7 +31,6 @@ Surprises consist in the residuals of the regression of the log-number of sales 
 		\hline \\[-1.8ex] 
 		log\_screens\_first\_week & 0.893$^{***}$ & 0.896$^{***}$ & 0.883$^{***}$ & 0.871$^{***}$ & 0.803$^{***}$ & 0.806$^{***}$ & 0.813$^{***}$ \\ 
 		& (0.004) & (0.005) & (0.005) & (0.005) & (0.006) & (0.006) & (0.006) \\ 
-		& & & & & & & \\ 
 		\hline \\[-1.8ex] 
 		R$^{2}$ & 0.907 & 0.909 & 0.910 & 0.912 & 0.932 & 0.936 & 0.938 \\ 
 		Adjusted R$^{2}$ & 0.907 & 0.908 & 0.910 & 0.912 & 0.928 & 0.931 & 0.933 \\ 
@@ -65,10 +63,10 @@ Surprises consist in the residuals of the regression of the log-number of sales 
 %\end{table}
 
 We have performed the same kind of regression on France data from 2004 to 2008 and find quite similar results (see table \ref{part2.1_tab3}).
-\begin{table}[H] \centering 
+\begin{table}[!htbp] \centering 
 	\caption{Regression of first-week entries on number of screens for France} 
 	\label{part2.1_tab3} 
-	\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+	\begin{tabular}{@{\extracolsep{0pt}}lccccccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
 		& \multicolumn{7}{c}{\textit{Dependent variable:}} \\ 
@@ -78,7 +76,6 @@ We have performed the same kind of regression on France data from 2004 to 2008 a
 		\hline \\[-1.8ex] 
 		log\_seance\_fr & 1.208$^{***}$ & 1.237$^{***}$ & 1.237$^{***}$ & 1.279$^{***}$ & 1.282$^{***}$ & 1.287$^{***}$ & 1.196$^{***}$ \\ 
 		& (0.009) & (0.010) & (0.010) & (0.014) & (0.014) & (0.014) & (0.014) \\ 
-		& & & & & & & \\ 
 		\hline \\[-1.8ex] 
 %		Observations & 2,046 & 2,046 & 2,046 & 2,046 & 2,046 & 2,046 & 2,046 \\ 
 		R$^{2}$ & 0.893 & 0.899 & 0.900 & 0.917 & 0.924 & 0.925 & 0.943 \\ 
@@ -98,7 +95,8 @@ The first prediction of Moretti is that if there are social learning effects in 
 \begin{figure}[H]\centering
 	\caption{Comparing decline in sales between Moretti's and French data}
 	\label{part2.1_plot_moretti}
-	\includegraphics[scale=0.6]{comparison.png}
+	\includegraphics[scale=0.5]{sales_us.png}
+	\includegraphics[scale=0.5]{sales_french.png}
 \end{figure}
 \noindent To test for differences in trajectories, Moretti estimates models of the form: \begin{equation}\label{eq_divergence}
 \ln(y_{jt})=\beta_0+\beta_1*t+\beta_2(t*S_j)+d_j+u_{jt}
@@ -109,7 +107,7 @@ where $\ln(y_{jt})$ is the log of box-office sales in week $t$; $S_j$ is surpris
 \begin{table}[!htbp] \centering 
 	\caption{Decline in box-office sales by opening week surprise} 
 	\label{graph_divergence} 
-	\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+	\begin{tabular}{@{\extracolsep{0pt}}lcccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
 		& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
@@ -119,22 +117,16 @@ where $\ln(y_{jt})$ is the log of box-office sales in week $t$; $S_j$ is surpris
 		\hline \\[-1.8ex] 
 		t & $-$0.526$^{***}$ & $-$0.526$^{***}$ & $-$0.571$^{***}$ &  \\ 
 		& (0.002) & (0.002) & (0.003) &  \\ 
-		& & & & \\ 
 		t$\times$surprise &  & 0.076$^{***}$ &  &  \\ 
 		&  & (0.004) &  &  \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise &  &  & 0.087$^{***}$ &  \\ 
 		&  &  & (0.004) &  \\ 
-		& & & & \\ 
 		t$\times$ top surprise &  &  &  & $-$0.459$^{***}$ \\ 
 		&  &  &  & (0.004) \\ 
-		& & & & \\ 
 		t$\times$ middle surprise &  &  &  & $-$0.546$^{***}$ \\ 
 		&  &  &  & (0.004) \\ 
-		& & & & \\ 
 		t$\times$ bottom surprise &  &  &  & $-$0.574$^{***}$ \\ 
 		&  &  &  & (0.004) \\ 
-		& & & & \\ 
 		\hline \\[-1.8ex] 
 		Observations & 26,598 & 26,598 & 26,598 & 26,598 \\ 
 		R$^{2}$ & 0.851 & 0.853 & 0.853 & 0.854 \\ 
@@ -145,17 +137,16 @@ where $\ln(y_{jt})$ is the log of box-office sales in week $t$; $S_j$ is surpris
 	\end{tabular} 
 \end{table}
  Table \ref{graph_divergence} estimates equation \ref{eq_divergence} and then differentiates between positive, top, middle and bottom surprises. Even though our value of $\beta_2$ is much smaller than Moretti's (0.076<0.463), it statistically different from zero. This means that we have a significant difference in trajectories between positive and negative surprises, but less important than in Moretti's paper.
-\pagebreak
 \subsection{Precision of the prior}\label{subsec2.3}
 Another prediction of Moretti is that the effect of surprises should vary with the precision of the prior people have on movies. Indeed, if people were to have a precise idea of the quality of the film, the information they would learn less from their peers' experience. To empirically identify which movies are likely to have precise priors, Moretti proposes to add dummies for sequels, and to use genre variances of the surprises in the first week as a proxy for the precision of their prior. 
 
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: Tue, Mar 06, 2018 - 15:30:08
-\begin{table}[H] \centering 
+\begin{table}[!htbp] \centering 
 	\caption{Precision of the prior} 
 	\label{precisionprior} 
-	\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+	\begin{tabular}{@{\extracolsep{0pt}}lcccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
 		& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
@@ -165,34 +156,24 @@ Another prediction of Moretti is that the effect of surprises should vary with t
 		\hline \\[-1.8ex] 
 		t & $-$0.570$^{***}$ & $-$0.698$^{***}$ & $-$0.678$^{***}$ & $-$0.578$^{***}$ \\ 
 		& (0.003) & (0.013) & (0.004) & (0.003) \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise & 0.105$^{***}$ & 0.109$^{***}$ & 0.009 & 0.078$^{***}$ \\ 
 		& (0.005) & (0.018) & (0.006) & (0.005) \\ 
-		& & & & \\ 
 		t$\times$saga & $-$0.027 &  &  &  \\ 
 		& (0.016) &  &  &  \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise$\times$saga & $-$0.145$^{***}$ &  &  &  \\ 
 		& (0.019) &  &  &  \\ 
-		& & & & \\ 
 		t$\times$var\_surprise &  & 0.370$^{***}$ &  &  \\ 
 		&  & (0.035) &  &  \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise$\times$var\_surprise &  & $-$0.062 &  &  \\ 
 		&  & (0.050) &  &  \\ 
-		& & & & \\ 
 		t$\times$art\_essai &  &  & 0.259$^{***}$ &  \\ 
 		&  &  & (0.006) &  \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise$\times$art\_essai &  &  & 0.066$^{***}$ &  \\ 
 		&  &  & (0.008) &  \\ 
-		& & & & \\ 
 		t$\times$ResteMonde &  &  &  & 0.106$^{***}$ \\ 
 		&  &  &  & (0.013) \\ 
-		& & & & \\ 
 		t$\times$positive\_surprise$\times$ResteMonde &  &  &  & 0.066$^{***}$ \\ 
 		&  &  &  & (0.016) \\ 
-		& & & & \\ 
 		\hline \\[-1.8ex] 
 		Observations & 26,598 & 26,546 & 26,598 & 26,598 \\ 
 		R$^{2}$ & 0.855 & 0.854 & 0.880 & 0.855 \\ 
