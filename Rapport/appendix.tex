@@ -1,5 +1,5 @@
 
-\subsection{Appendix 1: Derivating the least-square estimator for $U_{i j]$}
+\section*{Appendix 1: Derivating the Least-Square Estimator for $U_{i j}$}
 
 Like in the WLS approach, we minimize the exprected value of the square difference between the right-hand side above, and the sought term $U_{i j}$, choosing the optimal $\omega_{j}$, i.e. :
 \begin{center}
@@ -30,10 +30,10 @@ so, with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$,
 \end{center}
 Thus:
 \begin{equation}
-	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}
+	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}.
 \end{equation}
 	
-\subsection{Appendix 2: Probability of wathching in the first week}
+\section*{Appendix 2: Probability of Watching in the First Week}
 
 The sought probability of watching is:
 \begin{align*}
@@ -51,7 +51,7 @@ where $\sigma_{j 1}$ is the variance of the expression just above, and $\Phi$ is
 	&=(1-\omega_{j})^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{1}{r}
 \end{align*}
 	
-\subsection{Appendix 3: Signal With Feedback}
+\section*{Appendix 3: Signal with Feedback}
 From the information consumer i has, he can estimate the real quality $\alpha_{j}^{*}$ by maximizing the likelihood function:
 \begin{align*}
 	L_{i j 2}&=L[U_{1 j},...U_{n_{i} j}, n_{i}|\alpha_{j}^{*}]\\
@@ -113,7 +113,7 @@ At the following dates $t\geqslant2$, using the equation (8) from the next part,
 \end{align*}
 with $V_{p j}=\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}s_{i j}+\sum_{w=2}^{t}\omega_{j 3 w}S_{i j w}-u_{p 2}$	
 
-\subsection{Appendix 4: Probability of Watching after week 2}
+\section*{Appendix 4: Probability of Watching after Week 2}
 
 Just like before, the probability of watching at week t is:
 \begin{align*}
@@ -134,7 +134,7 @@ with (admitted):
 	&=(\omega_{j 2 t })^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{\sum_{p=2}^{t}z_{i p}}{(h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s})^{2}}+\frac{1}{r}
 \end{align*}
 	
-\subsection{Appendix 5: Temporal Evolution of the Probability of Watching}
+\section*{Appendix 5: Temporal Evolution of the Probability of Watching}
 To study the evolution over time we can derivate (discretely) $P_{t}$ two times w.r.t t. We will denote $S_{t}=h_{j}+k_{j}+Z_{i t}, Z_{i t}=\sum_{s=2}^{t}z_{i s}$:
 \begin{center}	
 	$\Delta P_{t}=P_{t+1}-P_{t}\approx P_{t}'$\\
