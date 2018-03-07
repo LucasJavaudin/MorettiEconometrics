@@ -15,10 +15,28 @@ Moretti's purpose is to provide evidence of social learning in consumption, that
 	\item we should not observe social learning effects when a surprise is due to elements other than quality of the film (let say weather).
 \end{enumerate}
 We have replicated Moretti's work and tried to confront his predictions with French data.
-\subsection{Identification of the Surprises}\label{subsec2.1}
 
-%parler des différentes variblaes de controle
-%first week-end vs first week-end
+\subsection{Data Cleaning}
+
+The first step before replicating the results of Moretti was to clean the US data in the same way as he does (conversion of variables in 2005 dollars, removal of movies with typos, generation of useful variables...).
+While doing so, we found some oddness in the code of Moretti.
+Notably, he removes all the movies for which the growth rate of the number of screens is higher than 5 between the first and the second week.
+He says in the article that the removed movies are the movies opening only in New York and Los Angeles.
+This justification appeared strange to us, even though we obtained very close results when computing the regressions without removing those movies.
+
+The French data were already cleaned.
+We decided to change the structure of the data to bring it closer to the structure of the US data.
+To replace the initial dataset where there is one variable for tickets sold of week 1 to 13 (\textit{entree\_fr1}, ..., \textit{entree\_fr13}), we built a dataset where there is a single variable for tickets sold (\textit{entree\_fr}) but one observation per week.
+This manipulation allowed us to use a very similar code for both dataset.
+
+While the US data indicate the sales of the movies, the French data report the tickets sold. 
+Hence, there is no need to correct the data for inflation effects like we did with the US data.
+
+We computed all the regressions with the tickets sold and the number of screens in Paris only and in France as a whole.
+The results are very similar between these two subsets.
+Here, we report only the results of the regressions when using the data of France as a whole.
+
+\subsection{Identification of the Surprises}\label{subsec2.1}
 
 Surprises consist in the residuals of the regression of the log-number of sales in the first week on the log-number of screens available (opened by theaters)\footnote{Actually Moretti defines them as the residual of the regression of the log-number of sales in the first \textit{week-end} on the log-number of screens available. The results are almost the same using first week or week-end. We use first-week sales in our work on French data.}.
 This definition of surprises holds because we suppose that theaters are profit-maximizing agents and make use of all the available information to predict the success of a movie. If this definition is correct, we should expect log-number of screens opened by theaters first week to be a good indicator of knowledge available on the movie quality before it is released. In the Table \ref{part2.1_tab1} we reproduce Moretti's regression of \textit{log\_sales\_first\_we} on \textit{log\_screens\_first\_week}. Each column is the result of the regression when we control with some variables (film genre, rating available, cost, distributor, weekday, month, week, year). The fact that adding control variables doesn't change the robustness of the regression proves Moretti's point which is that theaters take into account these factors when deciding their number of available screens. 
@@ -105,9 +123,8 @@ We perform the same kind of regression on French data from 2004 to 2008 and find
 		\textit{Note:}  & \multicolumn{7}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
 \end{table} 
-We can see that the number of sales in first week is highly explained by the number of screens opened. This result holds even when adding controls: each column corresponds to a regression in which we added a control variable (genre, ratings, distributors, month and week, year, and some other variables). The richness of the French dataset allows us to control with more variables than Moretti. In particular, we added a variable \textit{MoyennePresse} which corresponds to a grade attributed by film critics. We decided not to add the \textit{MoyenneSpectateurs} variable which was not available for theaters before the opening week.
+We can see that the number of sales in first week is highly explained by the number of screens opened. This result holds even when adding controls: each column corresponds to a regression in which we added a control variable (genre, ratings, distributors, month and week, year, and some other variables). The richness of the French dataset allows us to control with more variables than Moretti. In particular, we added a variable \textit{MoyennePresse} which corresponds to a grade attributed by film critics. We decided not to add the \textit{MoyenneSpectateurs} variable which is not available for theaters before the opening week.
 
-\pagebreak
 \subsection{Divergence of the Sales}\label{subsec2.2}
 
 
