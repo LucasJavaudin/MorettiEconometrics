@@ -12,6 +12,7 @@
 \usepackage[Glenn]{fncychap}
 \usepackage{theorem}
 \usepackage{hyperref}
+\hypersetup{backref, pdfpagemode=FullScreen, colorlinks=true, linkcolor={blue}}
 \usepackage{tikz}
 \usepackage{float}
 
@@ -83,16 +84,26 @@
 
 \input{part1.tex}
 \pagebreak
-\section{Analysis and Main Results}
+\section{Data Analysis and Main Results}
 
 \input{part2.1_robin}
 
 \input{part2.2_lucas.tex}
 
+
+\section{Concluding remarks}
+%parler des différentes variblaes de controle
+%first week-end vs first week-end
+
+
+We have worked on the model of Moretti and replicated his results. Then, we have used his framework to treat French data. All in all, our results are coherence with the ones of Moretti and our analysis shows evidences of social learning effects in movie sales in France. However, our findings are less sharp than Moretti's: we notice a weaker divergence in movie sales, fail to use one of the identification strategies for the precision of the prior and our evidence of social-learning decline over time is not clear-cut. 
+
+
+%on trouve des résultats cohérents même si quelques trucs ne marchent pas trop
+%on voir quelques trucs bizarres dans le code de moretti (lucas dira quoi)
 \pagebreak
-\section{Conclusion}
 \begin{appendices}
-\pagebreak
+
 	\input{appendix.tex}
 %\section{R codes}
 %\paragraph{Data cleaning}
