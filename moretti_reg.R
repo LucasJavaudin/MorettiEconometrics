@@ -261,6 +261,3 @@ lines(t, average_neg
       , type='b'
       , col='blue')
 legend(5.5, 14, legend=c('Positive', 'Negative'), col=c('red', 'blue'), lty=1, cex=0.8)
-
-dev.copy(jpeg,filename="plot_moretti.png");
-dev.off ();

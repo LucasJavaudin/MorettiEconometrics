@@ -52,6 +52,28 @@
 \begin{document}
 \maketitle
 
+%notes:
+%art et essai: impact sur la taille du réseau ou sur la précision du prix (plus de social learning?)
+%ne pas inclure moyenne spectateurs dans la reg
+%
+%Quelques éléments à inclure dans le rapport:
+%-présentation du modèle (<5 pages, il faut vulgariser le modèle pour que quelqu'un qui ne connait pas le modèle puisse le comprendre --déjà fait en partie dans le mid-term report)
+%-présentation des jeux de données
+%-expliquer des parties intéressantes du code
+%-graphiques intéressants (?)
+%-prendre exemple sur l'article de Moretti
+%-critiques intéressantes (les variables utilisées par Moretti -- explications parfois douteuses ou manquant de justifications scientifiques)
+%
+%
+%-mettre en parrallèle les régressions et les résultats
+%-donner les résultats intéressants
+%-test de student pour la convexité et concavité
+%
+%
+%Pour Robin:
+%sec1: comment trouve-t-on les surprises
+%sec2: surprises and sale dynamics
+%sec3: precision of the prior
 \begin{abstract}
 	This project aims at reproducing a paper by Moretti (2011) on social learning effects in movie sales with R. We then confront his theory and predictions with French data. We find evidence of social learning in French movie sales but our results are less robust than the results of Moretti.
 \end{abstract}
@@ -65,12 +87,153 @@
 
 \input{part2.1_robin}
 
-\pagebreak
 \input{part2.2_lucas.tex}
-\pagebreak
 \section{Conclusion: some comments}
-\pagebreak
-\input{appendix.tex}
+%\pagebreak
+%\begin{appendices}
+%\section{R codes}
+%\paragraph{Data cleaning}
+%\begin{figure}[H]
+	%\caption{R code used to clean French data}
+	%\label{code_data_cleaning}
+	%\begin{lstlisting}
+	%###################
+	%#  Data Cleaning  #
+	%###################
+	%
+	%# In this part, we change the dataset to make it closer to the dataset of Moretti.
+	%
+	%# Remove the movies without any screen in France during the first week (667 movies).
+	%fr_df <- fr_df[!is.na(fr_df$seance_fr1),]
+	%# Remove the movies without any id_distributeur (4 movies).
+	%fr_df <- fr_df[!is.na(fr_df$id_distributeur),]
+	%
+	%# Set MoyennePresse and MoyenneSpectateur to the mean if no value is specified.
+	%mean_moy <- mean(fr_df[!is.na(fr_df$MoyennePresse), 'MoyennePresse'])
+	%fr_df[is.na(fr_df$MoyennePresse), 'MoyennePresse'] <- mean_moy
+	%mean_moy <- mean(fr_df[!is.na(fr_df$MoyenneSpectateur), 'MoyenneSpectateur'])
+	%fr_df[is.na(fr_df$MoyenneSpectateur), 'MoyenneSpectateur'] <- mean_moy
+	%
+	%# Repeat each columns 13 times.
+	%n <- nrow(fr_df)
+	%df <- fr_df[rep(1:n, each=13),]
+	%
+	%# Add a column to indicate the week.
+	%df$t <- rep(0:12, n)
+	%
+	%# Replace the variables for each week (e.g. 'entree_paris1') with a global variable (e.g. 'entree_paris')
+	%for (i in 0:12) {
+	%for (variable in c('entree_paris', 'seance_paris', 'entree_fr', 'seance_fr')) {
+	%# Concatenate the variable name with and indicator for the week (e.g. 'entree_paris1').
+	%variable_t <- paste(c(variable, toString(i+1)), collapse='')
+	%# For each week, the variable in the new df (e.g. 'entree_paris') is taken from the old df (e.g. 'entree_paris1').
+	%df[df$t==i, variable] <- fr_df[,variable_t]
+	%}
+	%}
+	%
+	%# Keep only the useful variables.
+	%df <- df[,c(1:6, 33:43, 70:85)]
+	%
+	%# Replace the NAs in seance_fr with zeros.
+	%df[is.na(df$seance_fr), 'seance_fr'] <- 0
+	%
+	%# Generate logarithm of sales and screens.
+	%df$log_entree_paris <- log(df$entree_paris + 1)
+	%df$log_seance_paris <- log(df$seance_paris + 1)
+	%df$log_entree_fr <- log(df$entree_fr + 1)
+	%df$log_seance_fr <- log(df$seance_fr + 1)
+	%
+	%# Variable id_distributeur is a factor.
+	%df$id_distributeur <- as.factor(df$id_distributeur)
+	%
+	%# Variable id is a factor (this is used for movie dummies with the package lfe).
+	%df$X <- as.factor(df$X)
+	%df$X.eff <- rnorm(nlevels(df$X))
+	%
+	%\end{lstlisting}
+%\end{figure}
+%\begin{figure}[H]
+	%\caption{R code used to obtain French surprises}
+	%\label{code_french_surprises}
+	%\begin{lstlisting}
+	%###############
+	%#  Surprises  #
+	%###############
+	%
+	%# In this part, we estimate the surprises of the movies.
+	%
+	%# Regression of first week sales on number of screens.
+	%regSurprise1 <- lm(log_entree_fr ~ log_seance_fr, data = df, subset = (t==0))
+	%# Including dummies for genre
+	%regSurprise2 <- lm(log_entree_fr ~ log_seance_fr + genre, data = df, subset = (t==0))
+	%# Including dummies for ratings 
+	%regSurprise3 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction, data = df, subset = (t==0))
+	%# Including dummies for distributor 
+	%regSurprise4 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur, data = df, subset = (t==0))
+	%# Including dummies for month and week 
+	%regSurprise5 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine), data = df, subset = (t==0))
+	%# Including dummies for year 
+	%regSurprise6 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee), data = df, subset = (t==0))
+	%# Including other variables
+	%regSurprise7 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee) + MoyennePresse + sigma_note_presse + PoidsCasting + pub, data = df, subset = (t==0))
+	%
+	%# Print a table with the results of the last regressions.
+	%stargazer(regSurprise1, regSurprise2, regSurprise3, regSurprise4, regSurprise5, regSurprise6, regSurprise7, type='text', keep=c('log_seance_fr'), omit.stat=c("f", "ser"), title='Regression of first-week entries on number of screens')
+	%
+	%# Surprises are defined as the residuals of the last regression.
+	%surprise <- residuals(regSurprise7)
+	%df$surprise <- rep(residuals(regSurprise3), each = 13)
+	%quantile(df$surprise, probs = c(0, .05, .1, .25, .5, .75, .9, .95, 1))
+	%
+	%# Generate additional variables for surprises.
+	%df$positive_surprise <- df$surprise >= 0
+	%q_surprise <- quantile(df$surprise, probs = c(1/3, 2/3))
+	%df$bottom_surprise <- df$surprise < q_surprise[1]
+	%df$middle_surprise <- df$surprise >= q_surprise[1] & df$surprise < q_surprise[2]
+	%df$top_surprise <- df$surprise >= q_surprise[2]
+	%
+	%\end{lstlisting}
+%\end{figure}
+%
+%\begin{figure}[H]
+	%\caption{R code used to obtain French sales dynamics}
+	%\label{code_}
+	%\begin{lstlisting}
+	%###############################################
+	%#  Prediction 1: Surprises and Sale Dynamics  #
+	%###############################################
+	%
+	%# In this part, we study the difference in rate of decline between movies with a positive surprise and movies with a negative surprise.
+	%
+	%# Regression of sales on the interaction between time and surprises.
+	%# We use the command felm of the package lfe to compute linear regressions with thousands of dummies.
+	%regSaleDynamics1 <- felm(log_entree_fr ~ t | X, data = df)
+	%regSaleDynamics2 <- felm(log_entree_fr ~ t + t : surprise | X, data = df)
+	%regSaleDynamics3 <- felm(log_entree_fr ~ t + t : positive_surprise | X, data = df)
+	%regSaleDynamics4 <- felm(log_entree_fr ~ I(t * top_surprise)+ I(t * middle_surprise) + I(t * bottom_surprise) | X, data = df)
+	%
+	%# Print a table with the results of the regressions.
+	%stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
+	%
+	%
+	%\end{lstlisting}
+	%
+	%
+%\end{figure}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%\end{appendices}
+
 
 
 \end{document}
