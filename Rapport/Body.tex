@@ -75,7 +75,7 @@
 %sec2: surprises and sale dynamics
 %sec3: precision of the prior
 \begin{abstract}
-	This project has aimed at reproducing Moretti's 2011 paper on social learning effects in movie sales with R. We also blabla. Main results:
+	This project aims at reproducing a paper by Moretti (2011) on social learning effects in movie sales with R. We then confront his theory and predictions with French data. We find evidence of social learning in French movie sales but our results are less robust than the results of Moretti.
 \end{abstract}
 \tableofcontents
 \pagebreak
@@ -95,7 +95,10 @@
 \begin{appendices}
 \section{R codes}
 \paragraph{Data cleaning}
-\begin{lstlisting}
+\begin{figure}[H]
+	\caption{R code used to clean French data}
+	\label{code_data_cleaning}
+	\begin{lstlisting}
 	###################
 	#  Data Cleaning  #
 	###################
@@ -149,7 +152,88 @@
 	df$X <- as.factor(df$X)
 	df$X.eff <- rnorm(nlevels(df$X))
 	
-\end{lstlisting}
+	\end{lstlisting}
+\end{figure}
+\begin{figure}[H]
+	\caption{R code used to obtain French surprises}
+	\label{code_french_surprises}
+	\begin{lstlisting}
+	###############
+	#  Surprises  #
+	###############
+	
+	# In this part, we estimate the surprises of the movies.
+	
+	# Regression of first week sales on number of screens.
+	regSurprise1 <- lm(log_entree_fr ~ log_seance_fr, data = df, subset = (t==0))
+	# Including dummies for genre
+	regSurprise2 <- lm(log_entree_fr ~ log_seance_fr + genre, data = df, subset = (t==0))
+	# Including dummies for ratings 
+	regSurprise3 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction, data = df, subset = (t==0))
+	# Including dummies for distributor 
+	regSurprise4 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur, data = df, subset = (t==0))
+	# Including dummies for month and week 
+	regSurprise5 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine), data = df, subset = (t==0))
+	# Including dummies for year 
+	regSurprise6 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee), data = df, subset = (t==0))
+	# Including other variables
+	regSurprise7 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee) + MoyennePresse + sigma_note_presse + PoidsCasting + pub, data = df, subset = (t==0))
+	
+	# Print a table with the results of the last regressions.
+	stargazer(regSurprise1, regSurprise2, regSurprise3, regSurprise4, regSurprise5, regSurprise6, regSurprise7, type='text', keep=c('log_seance_fr'), omit.stat=c("f", "ser"), title='Regression of first-week entries on number of screens')
+	
+	# Surprises are defined as the residuals of the last regression.
+	surprise <- residuals(regSurprise7)
+	df$surprise <- rep(residuals(regSurprise3), each = 13)
+	quantile(df$surprise, probs = c(0, .05, .1, .25, .5, .75, .9, .95, 1))
+	
+	# Generate additional variables for surprises.
+	df$positive_surprise <- df$surprise >= 0
+	q_surprise <- quantile(df$surprise, probs = c(1/3, 2/3))
+	df$bottom_surprise <- df$surprise < q_surprise[1]
+	df$middle_surprise <- df$surprise >= q_surprise[1] & df$surprise < q_surprise[2]
+	df$top_surprise <- df$surprise >= q_surprise[2]
+	
+	\end{lstlisting}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{R code used to obtain French sales dynamics}
+	\label{code_}
+	\begin{lstlisting}
+	###############################################
+	#  Prediction 1: Surprises and Sale Dynamics  #
+	###############################################
+	
+	# In this part, we study the difference in rate of decline between movies with a positive surprise and movies with a negative surprise.
+	
+	# Regression of sales on the interaction between time and surprises.
+	# We use the command felm of the package lfe to compute linear regressions with thousands of dummies.
+	regSaleDynamics1 <- felm(log_entree_fr ~ t | X, data = df)
+	regSaleDynamics2 <- felm(log_entree_fr ~ t + t : surprise | X, data = df)
+	regSaleDynamics3 <- felm(log_entree_fr ~ t + t : positive_surprise | X, data = df)
+	regSaleDynamics4 <- felm(log_entree_fr ~ I(t * top_surprise)+ I(t * middle_surprise) + I(t * bottom_surprise) | X, data = df)
+	
+	# Print a table with the results of the regressions.
+	stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
+	
+	
+	\end{lstlisting}
+	
+	
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 \end{appendices}
 
 

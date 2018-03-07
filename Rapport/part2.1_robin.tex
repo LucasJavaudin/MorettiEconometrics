@@ -90,51 +90,25 @@ We have performed the same kind of regression on France data from 2004 to 2008 a
 \end{table} 
 We can see that the number of sales in first week is highly explained by the number of screens opened. This result holds even when adding controls: each column corresponds to a regression in which we added a control variable (genre, ratings, distributors, month and week, year, and some other variables).  
 
-\begin{figure}[H]
-	\caption{R code used to obtain French surprises}
-	\
-	\begin{lstlisting}
-	# Regression of first week sales on number of screens.
-	regSurprise1 <- lm(log_entree_fr ~ log_seance_fr, data = df, subset = (t==0))
-	# Including dummies for genre
-	regSurprise2 <- lm(log_entree_fr ~ log_seance_fr + genre, data = df, subset = (t==0))
-	# Including dummies for ratings 
-	regSurprise3 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction, data = df, subset = (t==0))
-	# Including dummies for distributor 
-	regSurprise4 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur, data = df, subset = (t==0))
-	# Including dummies for month and week 
-	regSurprise5 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine), data = df, subset = (t==0))
-	# Including dummies for year 
-	regSurprise6 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee), data = df, subset = (t==0))
-	# Including other variables
-	regSurprise7 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee) + MoyennePresse + MoyenneSpectateur + PoidsCasting + pub, data = df, subset = (t==0))
-	
-	\end{lstlisting}
-\end{figure}
 
 \subsection{Divergence of the sales}\label{subsec2.2}
 
+
+The first prediction of Moretti is that if there are social learning effects in movie sales, we should observe diverging trajectories between movies with positive and negative surprises. The idea is simple: without social learning, sales of movies with positive and negative surprises should decrease at the same rate; in other words, surprises would not have any effect on sales. Indeed, people would not take surprises as a new information on the movie quality. In the figure \ref{part2.1_plot_moretti}, we have reproduced Moretti's graph and plotted the graph for French data. In Moretti's graph we clearly see the diverging trajectories of the sales. Our graph shows less clear diverging trajectories on the whole durations we computed, though it is clear that trajectories diverge in the first four weeks of projections.
 \begin{figure}[H]\centering
 	\caption{Comparing decline in sales between Moretti's and French data}
 	\label{part2.1_plot_moretti}
 	\includegraphics[scale=0.6]{comparison.png}
 \end{figure}
-The first prediction of Moretti is that if there are social learning effects in movie sales, we should observe diverging trajectories between movies with positive and negative surprises. The idea is simple: without social learning, sales of movies with positive and negative surprises should decrease at the same rate; in other words, surprises would not have any effect on sales. Indeed, people would not take surprises as a new information on the movie quality. 
-
-Moretti estimates models of the form: \begin{equation}\label{key}
+\noindent To test for differences in trajectories, Moretti estimates models of the form: \begin{equation}\label{eq_divergence}
 \ln(y_{jt})=\beta_0+\beta_1*t+\beta_2(t*S_j)+d_j+u_{jt}
 \end{equation}
 where $\ln(y_{jt})$ is the log of box-office sales in week $t$; $S_j$ is surprise; $d_j$ is a movie fixed effect. The variable of interest is $\beta_2$ because we want to identify an effect of the surprise on the dynamic of sales over time.
-
-
-In the figure \ref{part2.1_plot_moretti}, we have reproduced Moretti's graph and plotted the graph for French data. In Moretti's graph we clearly see the diverging trajectories of the sales. Our graph also shows diverging trajectories
-
-
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Mar 05, 2018 - 11:55:03
-\begin{table}[H] \centering 
-	\caption{Decline in box-office sales by opening week surprise for French data} 
-	\label{} 
+% Date and time: Tue, Mar 06, 2018 - 15:33:41
+\begin{table}[!htbp] \centering 
+	\caption{Decline in box-office sales by opening week surprise} 
+	\label{graph_divergence} 
 	\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
@@ -146,20 +120,20 @@ In the figure \ref{part2.1_plot_moretti}, we have reproduced Moretti's graph and
 		t & $-$0.526$^{***}$ & $-$0.526$^{***}$ & $-$0.571$^{***}$ &  \\ 
 		& (0.002) & (0.002) & (0.003) &  \\ 
 		& & & & \\ 
-		t:surprise &  & 0.076$^{***}$ &  &  \\ 
+		t$\times$surprise &  & 0.076$^{***}$ &  &  \\ 
 		&  & (0.004) &  &  \\ 
 		& & & & \\ 
-		t:positive\_surprise &  &  & 0.087$^{***}$ &  \\ 
+		t$\times$positive\_surprise &  &  & 0.087$^{***}$ &  \\ 
 		&  &  & (0.004) &  \\ 
 		& & & & \\ 
-		t:bottom\_surpriseFALSE &  &  &  & $-$0.459$^{***}$ \\ 
+		t$\times$ top surprise &  &  &  & $-$0.459$^{***}$ \\ 
 		&  &  &  & (0.004) \\ 
 		& & & & \\ 
-		t:bottom\_surprise &  &  &  & $-$0.574$^{***}$ \\ 
+		t$\times$ middle surprise &  &  &  & $-$0.546$^{***}$ \\ 
 		&  &  &  & (0.004) \\ 
 		& & & & \\ 
-		t:middle\_surprise &  &  &  & $-$0.088$^{***}$ \\ 
-		&  &  &  & (0.005) \\ 
+		t$\times$ bottom surprise &  &  &  & $-$0.574$^{***}$ \\ 
+		&  &  &  & (0.004) \\ 
 		& & & & \\ 
 		\hline \\[-1.8ex] 
 		Observations & 26,598 & 26,598 & 26,598 & 26,598 \\ 
@@ -169,173 +143,71 @@ In the figure \ref{part2.1_plot_moretti}, we have reproduced Moretti's graph and
 		\hline \\[-1.8ex] 
 		\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
-\end{table} 
-\todo{En fait je crois que je comprends pas tout ici.}
-\begin{figure}[H]
-	\caption{R code used to obtain French sales dynamics}
-	\begin{lstlisting}
-	###############################################
-	#  Prediction 1: Surprises and Sale Dynamics  #
-	###############################################
-	
-	# In this part, we study the difference in rate of decline between movies with a positive surprise and movies with a negative surprise.
-	
-	# Regression of sales on the interaction between time and surprises.
-	# We use the command felm of the package lfe to compute linear regressions with thousands of dummies.
-	regSaleDynamics1 <- felm(log_entree_fr ~ t | X, data = df)
-	regSaleDynamics2 <- felm(log_entree_fr ~ t + t : surprise | X, data = df)
-	regSaleDynamics3 <- felm(log_entree_fr ~ t + t : positive_surprise | X, data = df)
-	regSaleDynamics4 <- felm(log_entree_fr ~ t : bottom_surprise + t : middle_surprise | X, data = df)
-	
-	# Print a table with the results of the regressions.
-	stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
-	
-	\end{lstlisting}
-	
-	
-\end{figure}
+\end{table}
+ Table \ref{graph_divergence} estimates equation \ref{eq_divergence} and then differentiates between positive, top, middle and bottom surprises. Even though our value of $\beta_2$ is much smaller than Moretti's (0.076<0.463), it statistically different from zero. This means that we have a significant difference in trajectories between positive and negative surprises, but less important than in Moretti's paper.
+\pagebreak
 \subsection{Precision of the prior}\label{subsec2.3}
-Another prediction of Moretti is that the effect of surprises should vary with the precision of the prior people have on movies.
-
-Moretti estimates models of the form: \begin{equation}\label{key}
-\ln(y_{jt})=\beta_0+\beta_1*t+\beta_2(t*S_j)+\beta_3(t*precision_j)+\beta_4(t*S_j*precision_j) +d_j+u_{jt}
-\end{equation}
+Another prediction of Moretti is that the effect of surprises should vary with the precision of the prior people have on movies. Indeed, if people were to have a precise idea of the quality of the film, the information they would learn less from their peers' experience. To empirically identify which movies are likely to have precise priors, Moretti proposes to add dummies for sequels, and to use genre variances of the surprises in the first week as a proxy for the precision of their prior. 
 
 
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Wed, Feb 28, 2018 - 14:27:56
-\begin{table}[!htbp] \centering 
+% Date and time: Tue, Mar 06, 2018 - 15:30:08
+\begin{table}[H] \centering 
 	\caption{Precision of the prior} 
-	\label{} 
-	\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+	\label{precisionprior} 
+	\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
-		& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-		\cline{2-4} 
-		\\[-1.8ex] & \multicolumn{3}{c}{log\_entree\_fr} \\ 
-		\\[-1.8ex] & (1) & (2) & (3)\\ 
+		& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+		\cline{2-5} 
+		\\[-1.8ex] & \multicolumn{4}{c}{log\_entree\_fr} \\ 
+		\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
 		\hline \\[-1.8ex] 
-		t & $-$0.570$^{***}$ & $-$0.698$^{***}$ & $-$0.678$^{***}$ \\ 
-		& (0.003) & (0.013) & (0.004) \\ 
-		& & & \\ 
-		t:positive\_surprise & 0.105$^{***}$ & 0.109$^{***}$ & 0.009 \\ 
-		& (0.005) & (0.018) & (0.006) \\ 
-		& & & \\ 
-		t:saga & $-$0.027 &  &  \\ 
-		& (0.016) &  &  \\ 
-		& & & \\ 
-		t:positive\_surpriseTRUE:saga & $-$0.145$^{***}$ &  &  \\ 
-		& (0.019) &  &  \\ 
-		& & & \\ 
-		t:var\_surprise &  & 0.370$^{***}$ &  \\ 
-		&  & (0.035) &  \\ 
-		& & & \\ 
-		t:positive\_surpriseTRUE:var\_surprise &  & $-$0.062 &  \\ 
-		&  & (0.050) &  \\ 
-		& & & \\ 
-		t:art\_essai &  &  & 0.259$^{***}$ \\ 
-		&  &  & (0.006) \\ 
-		& & & \\ 
-		t:positive\_surpriseTRUE:art\_essai &  &  & 0.066$^{***}$ \\ 
-		&  &  & (0.008) \\ 
-		& & & \\ 
+		t & $-$0.570$^{***}$ & $-$0.698$^{***}$ & $-$0.678$^{***}$ & $-$0.578$^{***}$ \\ 
+		& (0.003) & (0.013) & (0.004) & (0.003) \\ 
+		& & & & \\ 
+		t$\times$positive\_surprise & 0.105$^{***}$ & 0.109$^{***}$ & 0.009 & 0.078$^{***}$ \\ 
+		& (0.005) & (0.018) & (0.006) & (0.005) \\ 
+		& & & & \\ 
+		t$\times$saga & $-$0.027 &  &  &  \\ 
+		& (0.016) &  &  &  \\ 
+		& & & & \\ 
+		t$\times$positive\_surprise$\times$saga & $-$0.145$^{***}$ &  &  &  \\ 
+		& (0.019) &  &  &  \\ 
+		& & & & \\ 
+		t$\times$var\_surprise &  & 0.370$^{***}$ &  &  \\ 
+		&  & (0.035) &  &  \\ 
+		& & & & \\ 
+		t$\times$positive\_surprise$\times$var\_surprise &  & $-$0.062 &  &  \\ 
+		&  & (0.050) &  &  \\ 
+		& & & & \\ 
+		t$\times$art\_essai &  &  & 0.259$^{***}$ &  \\ 
+		&  &  & (0.006) &  \\ 
+		& & & & \\ 
+		t$\times$positive\_surprise$\times$art\_essai &  &  & 0.066$^{***}$ &  \\ 
+		&  &  & (0.008) &  \\ 
+		& & & & \\ 
+		t$\times$ResteMonde &  &  &  & 0.106$^{***}$ \\ 
+		&  &  &  & (0.013) \\ 
+		& & & & \\ 
+		t$\times$positive\_surprise$\times$ResteMonde &  &  &  & 0.066$^{***}$ \\ 
+		&  &  &  & (0.016) \\ 
+		& & & & \\ 
 		\hline \\[-1.8ex] 
-		Observations & 26,598 & 26,546 & 26,598 \\ 
-		R$^{2}$ & 0.855 & 0.854 & 0.880 \\ 
-		Adjusted R$^{2}$ & 0.843 & 0.842 & 0.870 \\ 
+		Observations & 26,598 & 26,546 & 26,598 & 26,598 \\ 
+		R$^{2}$ & 0.855 & 0.854 & 0.880 & 0.855 \\ 
+		Adjusted R$^{2}$ & 0.843 & 0.842 & 0.870 & 0.843 \\ 
 		\hline 
 		\hline \\[-1.8ex] 
-		\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
 \end{table} 
-%
-%%PARIS
-%
-%% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-%% Date and time: Wed, Feb 28, 2018 - 14:37:16
-%\begin{table}[!htbp] \centering 
-%	\caption{Decline in box-office sales by opening week surprise} 
-%	\label{} 
-%	\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-%		\\[-1.8ex]\hline 
-%		\hline \\[-1.8ex] 
-%		& \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-%		\cline{2-5} 
-%		\\[-1.8ex] & \multicolumn{4}{c}{log\_entree\_paris} \\ 
-%		\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-%		\hline \\[-1.8ex] 
-%		t & $-$0.583$^{***}$ & $-$0.583$^{***}$ & $-$0.564$^{***}$ &  \\ 
-%		& (0.002) & (0.002) & (0.003) &  \\ 
-%		& & & & \\ 
-%		t:surprise &  & $-$0.032$^{***}$ &  &  \\ 
-%		&  & (0.004) &  &  \\ 
-%		& & & & \\ 
-%		t:positive\_surprise &  &  & $-$0.039$^{***}$ &  \\ 
-%		&  &  & (0.005) &  \\ 
-%		& & & & \\ 
-%		t:bottom\_surpriseFALSE &  &  &  & $-$0.594$^{***}$ \\ 
-%		&  &  &  & (0.004) \\ 
-%		& & & & \\ 
-%		t:bottom\_surprise &  &  &  & $-$0.541$^{***}$ \\ 
-%		&  &  &  & (0.004) \\ 
-%		& & & & \\ 
-%		t:middle\_surprise &  &  &  & $-$0.021$^{***}$ \\ 
-%		&  &  &  & (0.006) \\ 
-%		& & & & \\ 
-%		\hline \\[-1.8ex] 
-%		Observations & 35,113 & 35,113 & 35,113 & 35,113 \\ 
-%		R$^{2}$ & 0.810 & 0.810 & 0.810 & 0.811 \\ 
-%		Adjusted R$^{2}$ & 0.794 & 0.794 & 0.794 & 0.795 \\ 
-%		\hline 
-%		\hline \\[-1.8ex] 
-%		\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-%	\end{tabular} 
-%\end{table} 
-%
-%% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-%% Date and time: Wed, Feb 28, 2018 - 14:37:16
-%\begin{table}[!htbp] \centering 
-%	\caption{Precision of the prior} 
-%	\label{} 
-%	\begin{tabular}{@{\extracolsep{5pt}}lccc} 
-%		\\[-1.8ex]\hline 
-%		\hline \\[-1.8ex] 
-%		& \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-%		\cline{2-4} 
-%		\\[-1.8ex] & \multicolumn{3}{c}{log\_entree\_paris} \\ 
-%		\\[-1.8ex] & (1) & (2) & (3)\\ 
-%		\hline \\[-1.8ex] 
-%		t & $-$0.560$^{***}$ & $-$0.772$^{***}$ & $-$0.616$^{***}$ \\ 
-%		& (0.003) & (0.017) & (0.005) \\ 
-%		& & & \\ 
-%		t:positive\_surprise & $-$0.030$^{***}$ & $-$0.213$^{***}$ & $-$0.126$^{***}$ \\ 
-%		& (0.005) & (0.024) & (0.007) \\ 
-%		& & & \\ 
-%		t:saga & $-$0.118$^{***}$ &  &  \\ 
-%		& (0.017) &  &  \\ 
-%		& & & \\ 
-%		t:positive\_surpriseTRUE:saga & $-$0.022 &  &  \\ 
-%		& (0.020) &  &  \\ 
-%		& & & \\ 
-%		t:var\_surprise &  & 0.576$^{***}$ &  \\ 
-%		&  & (0.045) &  \\ 
-%		& & & \\ 
-%		t:positive\_surpriseTRUE:var\_surprise &  & 0.480$^{***}$ &  \\ 
-%		&  & (0.065) &  \\ 
-%		& & & \\ 
-%		t:art\_essai &  &  & 0.087$^{***}$ \\ 
-%		&  &  & (0.006) \\ 
-%		& & & \\ 
-%		t:positive\_surpriseTRUE:art\_essai &  &  & 0.156$^{***}$ \\ 
-%		&  &  & (0.009) \\ 
-%		& & & \\ 
-%		\hline \\[-1.8ex] 
-%		Observations & 35,113 & 35,074 & 35,113 \\ 
-%		R$^{2}$ & 0.811 & 0.814 & 0.819 \\ 
-%		Adjusted R$^{2}$ & 0.795 & 0.798 & 0.804 \\ 
-%		\hline 
-%		\hline \\[-1.8ex] 
-%		\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-%	\end{tabular} 
-%\end{table} 
-
+\noindent Moretti estimates models of the form: \begin{equation}\label{key}
+\ln(y_{jt})=\beta_0+\beta_1*t+\beta_2(t*S_j)+\beta_3(t*precision_j)+\beta_4(t*S_j*precision_j) +d_j+u_{jt}
+\end{equation}
+where precision $j$ is a measure of the precision of the prior for movie $j$. The coefficient of interest is the coefficient on the triple interaction between the time trend, the surprise and the precision of the prior, $\beta_4$. We make three hypothesis: \begin{enumerate}
+	\item as in Moretti (2011), we test that sequels (``\textit{saga}'') had higher priors and where subject to less social learning effect;
+	\item we also suppose that art-house cinema (``\textit{art et essai}'') have a more unpredictable quality;
+	\item and we wonder if film produced outside the occidental world (``\textit{Reste Monde}'') have more unpredictable quality.
+\end{enumerate}
+Table \ref{precisionprior} summarizes our regressions. We included dummies for sequels, art-house cinema and ``outside occident'' movies. Results show that \textit{saga} has a negative effect on the impact of a surprise over time, meaning that \textit{sagas} have indeed a weaker social learning effect. On the opposite, and as expected, \textit{art et essai} and \textit{Reste Monde} both have significant positive effect on the impact of a surprise over time. Our results support those of Moretti.

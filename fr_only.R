@@ -56,6 +56,9 @@ df$id_distributeur <- as.factor(df$id_distributeur)
 df$X <- as.factor(df$X)
 df$X.eff <- rnorm(nlevels(df$X))
 
+# Variable pour les films hors d'Europe et des États-Unis.
+df$ResteMonde <- df$Europe==0 & df$France==0 & df$USA == 0
+
 ###############
 #  Surprises  #
 ###############
@@ -75,10 +78,10 @@ regSurprise5 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_dis
 # Including dummies for year 
 regSurprise6 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee), data = df, subset = (t==0))
 # Including other variables
-regSurprise7 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee) + MoyennePresse + MoyenneSpectateur + PoidsCasting + pub, data = df, subset = (t==0))
+regSurprise7 <- lm(log_entree_fr ~ log_seance_fr + genre + interdiction + id_distributeur + factor(mois) + factor(semaine) + factor(annee) + MoyennePresse + sigma_note_presse + PoidsCasting + pub, data = df, subset = (t==0))
 
 # Print a table with the results of the last regressions.
-stargazer(regSurprise1, regSurprise2, regSurprise3, regSurprise4, regSurprise5, regSurprise6, regSurprise7, keep=c('log_seance_fr'), omit.stat=c("f", "ser"), title='Regression of first-week entries on number of screens for France')
+stargazer(regSurprise1, regSurprise2, regSurprise3, regSurprise4, regSurprise5, regSurprise6, regSurprise7, type='text', keep=c('log_seance_fr'), omit.stat=c("f", "ser"), title='Regression of first-week entries on number of screens')
 
 # Surprises are defined as the residuals of the last regression.
 surprise <- residuals(regSurprise7)
@@ -103,7 +106,7 @@ df$top_surprise <- df$surprise >= q_surprise[2]
 regSaleDynamics1 <- felm(log_entree_fr ~ t | X, data = df)
 regSaleDynamics2 <- felm(log_entree_fr ~ t + t : surprise | X, data = df)
 regSaleDynamics3 <- felm(log_entree_fr ~ t + t : positive_surprise | X, data = df)
-regSaleDynamics4 <- felm(log_entree_fr ~ t : bottom_surprise + t : middle_surprise | X, data = df)
+regSaleDynamics4 <- felm(log_entree_fr ~ I(t * top_surprise)+ I(t * middle_surprise) + I(t * bottom_surprise) | X, data = df)
 
 # Print a table with the results of the regressions.
 stargazer(regSaleDynamics1, regSaleDynamics2, regSaleDynamics3, regSaleDynamics4, omit.stat=c("f", "ser"), title='Decline in box-office sales by opening week surprise')
@@ -127,9 +130,10 @@ df$var_surprise <- rep(variance_surprise, each=13)
 regPrior1 <- felm(log_entree_fr ~ t + t:positive_surprise + t:saga + t:positive_surprise:saga | X, data = df)
 regPrior2 <- felm(log_entree_fr ~ t + t:positive_surprise + t:var_surprise + t:positive_surprise:var_surprise | X, data = df)
 regPrior3 <- felm(log_entree_fr ~ t + t:positive_surprise + t:art_essai + t:positive_surprise:art_essai | X, data = df)
+regPrior4 <- felm(log_entree_fr ~ t + t:positive_surprise + t:ResteMonde + t:positive_surprise:ResteMonde | X, data = df)
 
 # Print a table with the results of the two regressions.
-stargazer(regPrior1, regPrior2, regPrior3, omit.stat=c("f", "ser"), title='Precision of the prior')
+stargazer(regPrior1, regPrior2, regPrior3, regPrior4, omit.stat=c("f", "ser"), title='Precision of the prior')
 
 ##############################################
 #  Prediction 3: Size of the Social Network  #
@@ -143,7 +147,7 @@ df$seance_fr_first_week <- rep(df[df$t==0, 'seance_fr'], each=13)/1000
 regSocialNetwork2 <- felm(log_entree_fr ~ t + t:positive_surprise + t:seance_fr_first_week + t:positive_surprise:seance_fr_first_week | X, data = df)
 
 # Print a table with the results of the regressions.
-stargazer(regSocialNetwork1, regSocialNetwork2, omit.stat=c("f", "ser"), title="Precision of peers' signal")
+stargazer(regSocialNetwork1, regSocialNetwork2, type='text', omit.stat=c("f", "ser"), title="Precision of peers' signal")
 
 #####################################
 #  Prediction 4: Decline over time  #
@@ -155,7 +159,7 @@ stargazer(regSocialNetwork1, regSocialNetwork2, omit.stat=c("f", "ser"), title="
 regDecline <- felm(log_entree_fr ~ t + I(t**2) + t:positive_surprise + I(t**2):positive_surprise | X, data = df)
 
 # Print a table with the results of the regression.
-stargazer(regDecline, omit.stat=c("f", "ser"), title="Convexity of the sales profile")
+stargazer(regDecline, type='text', omit.stat=c("f", "ser"), title="Convexity of the sales profile")
 
 # Test the hypothesis 2(t^2 + t^2:positive_surprise) < 0 (decline of positive surprise movies should be concave).
 coeff <- coefficients(regDecline)
@@ -166,6 +170,8 @@ variance <- 4 * ( varcov_matrix[2, 2] + varcov_matrix[4, 4] + 2*varcov_matrix[2,
 statistics <- 2 * (coeff[2] + coeff[4]) / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_pos <- pnorm(statistics)
+print(paste('value of the statistics for the concavity test:', statistics))
+print(paste('p-value of the concavity test:', pvalue_pos))
 
 # Test the hypothesis 2 t^2 > 0 (decline of negative surprise movies should be convex).
 # Compute the variance of 2 t^2.
@@ -174,6 +180,8 @@ variance <- varcov_matrix[2, 2]
 statistics <- coeff[2] / variance^(1/2)
 # Compute the p-value (the statistics follows a standard normal distribution). 
 pvalue_neg <- pnorm(-statistics)
+print(paste('value of the statistics for the convexity test:', statistics))
+print(paste('p-value of the convexity test:', pvalue_neg))
 
 ###########
 #  Graph  #
@@ -200,13 +208,10 @@ plot(t, average_pos
      , type='b'
      , col='red'
      , ylim=c(0, 15)
-     , main='Decline in sales for french data'
+     , main='Decline in sale for movies with positive and negative surprises'
      , xlab='Week'
      , ylab='Log Sales')
 lines(t, average_neg
       , type='b'
       , col='blue')
 legend(5.5, 14, legend=c('Positive', 'Negative'), col=c('red', 'blue'), lty=1, cex=0.8)
-dev.copy(jpeg,filename="plot_fr.png");
-dev.off()
-
