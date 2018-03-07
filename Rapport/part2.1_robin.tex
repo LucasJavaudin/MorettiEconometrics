@@ -18,21 +18,21 @@ We have replicated Moretti's work and tried to confront his predictions with Fre
 
 \subsection{Data Cleaning}
 
-The first step before replicating the results of Moretti was to clean the US data in the same way as he does (conversion of variables in 2005 dollars, removal of movies with typos, generation of useful variables...).
-While doing so, we found some oddness in the code of Moretti.
+The first step before replicating the results of Moretti is to clean the US data in the same way as he does (conversion of variables in 2005 dollars, removal of movies with typos, generation of useful variables...).
+While doing so, we find some oddness in the code of Moretti.
 Notably, he removes all the movies for which the growth rate of the number of screens is higher than 5 between the first and the second week.
 He says in the article that the removed movies are the movies opening only in New York and Los Angeles.
-This justification appeared strange to us, even though we obtained very close results when computing the regressions without removing those movies.
+This justification appears strange to us, even though we obtain very close results when computing the regressions without removing those movies.
 
-The French data were already cleaned.
-We decided to change the structure of the data to bring it closer to the structure of the US data.
-To replace the initial dataset where there is one variable for tickets sold of week 1 to 13 (\textit{entree\_fr1}, ..., \textit{entree\_fr13}), we built a dataset where there is a single variable for tickets sold (\textit{entree\_fr}) but one observation per week.
-This manipulation allowed us to use a very similar code for both dataset.
+The French data is already cleaned.
+We change the structure of the data to bring it closer to the structure of the US data.
+To replace the initial dataset where there is one variable for tickets sold of week 1 to 13 (\textit{entree\_fr1}, ..., \textit{entree\_fr13}), we build a dataset where there is a single variable for tickets sold (\textit{entree\_fr}) but one observation per week.
+This manipulation allows us to use a very similar code for both datasets.
 
 While the US data indicate the sales of the movies, the French data report the tickets sold. 
-Hence, there is no need to correct the data for inflation effects like we did with the US data.
+Hence, there is no need to correct the data for inflation effects like we do with the US data.
 
-We computed all the regressions with the tickets sold and the number of screens in Paris only and in France as a whole.
+We compute all the regressions with the tickets sold and the number of screens in Paris only and in France as a whole.
 The results are very similar between these two subsets.
 Here, we report only the results of the regressions when using the data of France as a whole.
 
