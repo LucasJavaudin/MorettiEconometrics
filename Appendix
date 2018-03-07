@@ -1,0 +1,169 @@
+
+\subsection{Appendix 1: Derivating the least-square estimator for $U_{i j]$}
+
+Like in the WLS approach, we minimize the exprected value of the square difference between the right-hand side above, and the sought term $U_{i j}$, choosing the optimal $\omega_{j}$, i.e. :
+\begin{center}
+	$\min_{\omega_{j}} \mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^{2})=\min_{\omega_{j}} \mathbb{E}((-\omega_{j} (\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})\epsilon_{i j})^{2})$.
+\end{center}
+By independance of the different random variable studied, and linearity of the expected value:
+\begin{align*}
+	\mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^2)&=\omega_{j}^{2}\mathbb{E}((\alpha_{j}^{*}-X_{j}'\beta+v_{i j})^{2})+(1-\omega_{j})^{2}\mathbb{E}((\epsilon_{i j})^{2})\\
+	&=\omega_{j}^{2}Var(\alpha_{j}^{*}-X_{j}'\beta+v_{i j})+(1-\omega_{j})^{2}Var(\epsilon_{i j}),
+\end{align*}
+since all the variables considered here are zero-mean (the expectation of their square value is thus their variance). Hence:
+\begin{align*}
+	\mathbb{E}((\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}-U_{i j})^2)&=\omega_{j}^{2}(Var(\alpha_{j}^{*}-X_{j}'\beta)+Var(v_{i j}))+(1-\omega_{j})^{2}Var(\epsilon_{i j})\\
+	&=\omega_{j}^{2}\left(\frac{1}{m_{j}}+\frac{1}{d}\right)+(1-\omega_{j})^{2}\frac{1}{k_{j}}.
+\end{align*}
+The problem to solve is thus
+\begin{center}
+	$\min_{\omega_{j}} \omega_{j}^{2}(\frac{1}{m_{j}}+\frac{1}{d})+(1-\omega_{j})^{2}\frac{1}{k_{j}}$.
+\end{center}
+The first-order condition w.r.t $\omega_{j}$ is 
+\begin{center}
+	$2\omega_{j}(\frac{1}{m_{j}}+\frac{1}{d})-2(1-\omega_{j})\frac{1}{k_{j}}=0$.
+\end{center}
+so, with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$, we can rewrite:
+\begin{center}
+	$\omega_{j}(\frac{1}{h_{j}}+\frac{1}{k_{j}})=\frac{1}{k_{j}}$
+	$\omega_j=\frac{h_{j}}{h_{j}+k_{j}}$.
+\end{center}
+Thus:
+\begin{equation}
+	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}
+\end{equation}
+	
+\subsection{Appendix 2: Probability of wathching in the first week}
+
+The sought probability of watching is:
+\begin{align*}
+	P_{1}&=\mathbb{P}(\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]>q_{i t})\\
+	&=\mathbb{P}(\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}>q+u_{i t})\\
+	&=\mathbb{P}(X_{j}'\beta+(1-\omega_{j})(\epsilon_{i j}+v_{i j}+\alpha_{j}^{*}-X_{j}'\beta)-q-u_{i t}>0)\\
+	&=\mathbb{P}((1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q>-(1-\omega_{j})(\epsilon_{i j}+v_{i j})+u_{i t})\\
+	&=\Phi\left(\frac{(1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j 1}}\right),
+\end{align*}
+where $\sigma_{j 1}$ is the variance of the expression just above, and $\Phi$ is the cumulative function of a standard normal distribution $\mathcal{N}(0,1)$. All remaining random variables (which are all zero-mean) have been eliminated in the expression with the normal distribution $\Phi$ ($\alpha_{j}^{*}$ is no longer random according to the previous remark). Since the variance of a sum of independant normal variables is the sum of the variances: 
+\begin{align*}
+	\sigma_{j 1}^{2}
+	&=Var(-(1-\omega_{j})(\epsilon_{i j}+v_{i j})+u_{i t})\\
+	&=(1-\omega_{j})^{2}(Var(\epsilon_{i j})+Var(v_{i j}))+Var(u_{i t})\\
+	&=(1-\omega_{j})^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{1}{r}
+\end{align*}
+	
+\subsection{Appendix 3: Signal With Feedback}
+From the information consumer i has, he can estimate the real quality $\alpha_{j}^{*}$ by maximizing the likelihood function:
+\begin{align*}
+	L_{i j 2}&=L[U_{1 j},...U_{n_{i} j}, n_{i}|\alpha_{j}^{*}]\\
+	&=\prod_{p=1}^{n_{i}}\mathbb{P}_{\alpha_{j}^{*}}(V_{p j}>q \wedge U_{p j}=\alpha_{j}^{*}+v_{p j})
+	\prod_{p=n_{i}+1}^{N_{i}}\mathbb{P}_{\alpha_{j}^{*}}(V_{p j}<q),
+\end{align*}
+with $V_{p j}=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{p j}-u_{p 2}$ the adjusted expected utility of peer p. We use the cumulative distribution functions in the maximum likelihood function instead of the densities because one of the elements we observe is the satifaction (or not) of inequalities.\\
+Let us consider f(U,V) the joint density of $U_{p j}$ and $V_{p j}$. We need to consider this joint density so as to include all the information we have on individuals who went to see the film. We can then keep $U_{p j}$ equal to its value at $\alpha_{j}^{*}$ and motify the value of $V_{p j}$ between q and $\infty$. We will also consider $\phi$, the standard normal density. Then:
+\begin{align*}
+	L_{i j 2}&=\prod_{p=1}^{n_{i}}\int_{q}^{\infty}f(U_{p j}(\alpha_{j}^{*}), V)dV \prod_{n_{i}+1}^{N_{i}}\mathbb{P}(V_{p j}<q).
+\end{align*}	
+Furthermore:
+\begin{align*}
+	V_{p j}=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{p j}-u_{p 2}=\omega_{j} X_{j}'\beta+(1-\omega_{j})(U_{p j}+\epsilon_{p j})-u_{p 2},
+\end{align*}	
+so:
+\begin{align*}
+	f(U_{p j}(\alpha_{j}^{*}), V_{p j})
+	&=f(\alpha_{j}^{*}+v_{p j}, \omega_{j} X_{j}'\beta+(1-\omega_{j})(U_{p j}+\epsilon_{p j})-u_{p 2})\\
+	&=f_{U}(\alpha_{j}^{*}+v_{p j})f_{V|U=U_{p j}}(\omega_{j} X_{j}'\beta+(1-\omega_{j})(U+\epsilon_{p j})-u_{p 2}),	
+\end{align*}
+where $f_{U}$ is the density of variable U, which distribution is $\mathcal{N}(\alpha_{j}^{*}, \frac{1}{d})$ and $f_{V|U=U_{p j}}(V_{p, j})=f(\omega_{j} X_{j}'\beta+(1-\omega_{j})(U+\epsilon_{p j})-u_{p 2})$ is the distribution of a $\mathcal{N}(\omega_{j} X_{j}'\beta+(1-\omega_{j})U, (1-\omega_{j})^{2}Var(\epsilon_{p j})+Var(u_{p 2}))$ variable i.e. $\mathcal{N}(\omega_{j} X_{j}'\beta+(1-\omega_{j})U, (1-\omega_{j})^{2}\frac{1}{k_{j}}+\frac{1}{r})$. So,
+\begin{align*}
+	f_{U}(U_{p j})&=\frac{1}{\sqrt{\frac{1}{d}}}\phi\left(\frac{U_{p j}-\alpha_{j}}{\sqrt{\frac{1}{d}}}\right)=\sqrt{d}\phi(\sqrt{d}(U_{p j}-\alpha_{j}))\\
+	f_{V|U=U_{p j}}(V)&=\frac{1}{\sigma_{V|U_{p j}}}\phi\left(\frac{V-\omega_{j} X_{j}'\beta-(1-\omega_{j})U_{p j}}{\sigma_{V|U_{p j}}}\right),\\
+	f_{V}(V)&=\frac{1}{\sigma_{V}}\phi\left(\frac{V-\omega_{j} X_{j}'\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right),
+\end{align*}
+	with $\sigma_{V|U_{p j}}^{2}=(1-\omega_{j})^{2}\frac{1}{k_{j}}+\frac{1}{r}$ and $\sigma_{V}^{2}=\sigma_{V|U_{p j}}^{2}+(1-\omega_{j})^{2}Var(U_{p j}-\alpha_{j}^{*})=(1-\omega_{j})^{2}(\frac{1}{k_{j}}+\frac{1}{d})+\frac{1}{r}$.
+Thus:
+\begin{align*}
+	L_{i j 2}&=\prod_{p=1}^{n_{i}}\sqrt{d}\phi(\sqrt{d}(U_{p j}-\alpha_{j}^{*})\left(1-\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})U_{p j}}{\sigma_{V|U_{p j}}}\right)\right)
+	\prod_{p=n_{i}+1}^{N_{i}}\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right).
+\end{align*}
+We can derive w.r.t $\alpha_{j}^{*}$:
+\begin{align*}
+	-\sqrt{d}\sum_{p=1}^{n_{i}}L_{i j 2}\frac{\phi'(\sqrt{d}(U_{p j}-\alpha_{j}^{*}))}{\phi(\sqrt{d}(U_{p j}-\alpha_{j}^{*}))}
+	+\frac{-(1-\omega_{j})}{\sigma_{V}}\sum_{p=n_{i}+1}^{N_{i}}\frac{\Phi'\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}L_{i j 2}=0.\\
+\end{align*}
+Since $\Phi'(x)=\phi(x)$ and $\phi'(x)=-x\phi(x)$,
+\begin{align*}	
+	\sqrt{d}\sum_{p=1}^{n_{i}}(\sqrt{d}(U_{p j}-\alpha_{j}^{*}))
+	=\frac{1-\omega_{j}}{\sigma_{V}}(N_{i}-n_{i})\frac{\phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}\\	
+\end{align*}
+\begin{equation}
+	\alpha_{j}^{*}=\frac{1}{n_{i}}\sum_{p=1}^{n_{i}}U_{p j}-\frac{1-\omega_{j}}{d\sigma_{V}}\frac{N_{i}-n_{i}}{n_{i}}\frac{\phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}\\
+\end{equation}
+	
+We denote the associated maximum likelihood estimator $S_{i j 2}$. The second part of the expression is negative so that $S_{i j 2}$ is lower than the average of the ex-post utilities consumer i recieves; this is the impact of non-viewers.\\
+
+Moretti underlines that the estimator obtained is unbiased and asymptotically normal (this second property comes from the fact that the estimator is a likelihood maximizer): 
+\begin{equation}
+	S_{i j 2}\sim\mathcal{N}(\alpha_{j}^{*}, \frac{1}{b_{i 2}}) , b_{i 2}=dn_{i}+(N_{i}-n_{i})\frac{\phi(c)}{\Phi(c)}\left(c+\frac{\phi(c)}{\Phi(c)}\right)(\frac{1-\omega_{j}}{\sigma_{V}})^{2}
+\end{equation}\\
+\\
+At the following dates $t\geqslant2$, using the equation (8) from the next part, the estimator for $\alpha_{j}^{*}$ maximizes the likelihood function:
+\begin{align*}
+	L_{i j t}&=L[U_{1 j},...U_{n_{i} j}, n_{i}|\alpha_{j}^{*},S_{i j 2}...S_{i j t-1}]\\
+	&=\prod_{p=1}^{n_{i}}\mathbb{P}_{\alpha_{j}^{*}}(V_{p j}>q \wedge U_{p j}=\alpha_{j}^{*}+v_{p j})\prod_{p=n_{i}+1}^{N_{i}}\mathbb{P}_{\alpha_{j}^{*}}(V_{p j}<q),
+\end{align*}
+with $V_{p j}=\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}s_{i j}+\sum_{w=2}^{t}\omega_{j 3 w}S_{i j w}-u_{p 2}$	
+
+\subsection{Appendix 4: Probability of Watching after week 2}
+
+Just like before, the probability of watching at week t is:
+\begin{align*}
+	P_{t}&=\mathbb{P}(\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]>q_{i t})\\
+	&=\mathbb{P}\left(\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}(\epsilon_{i j}+v_{i j}+\alpha_{j}^{*})+\sum_{w=2}^{t}\omega_{j 3 w}(\alpha_{j}^{*}+(S_{i j w}-\alpha_{j}^{*}))-q-u_{i t}>0\right)\\
+	&=\mathbb{P}\left(\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}\alpha_{j}^{*}+\sum_{w=2}^{t}\omega_{j 3 w}\alpha_{j}^{*}-q
+	>u_{i t}-\omega_{j 2 t}(\epsilon_{i j}+v_{i j})-\sum_{w=2}^{t}\omega_{j 3 w}(S_{i j w}-\alpha_{j}^{*})\right)\\
+	&=\mathbb{P}\left(\omega_{j 1 t}X_{j}'\beta +(1-\omega_{j 1 t})\alpha_{j}^{*}-q
+	>-\omega_{j 2 t}(\epsilon_{i j}+v_{i j})-\sum_{w=2}^{t}\omega_{j 3 w}(S_{i j w}-\alpha_{j}^{*})+u_{i t}\right).\\
+\end{align*}
+Thus:
+\begin{equation}
+	P_{t}=\Phi\left(\frac{(1-\omega_{j 1 t})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j t}}\right),
+\end{equation}
+with (admitted):
+\begin{align*}
+	\sigma_{j t}^{2}
+	&=(\omega_{j 2 t })^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)+\frac{\sum_{p=2}^{t}z_{i p}}{(h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s})^{2}}+\frac{1}{r}
+\end{align*}
+	
+\subsection{Appendix 5: Temporal Evolution of the Probability of Watching}
+To study the evolution over time we can derivate (discretely) $P_{t}$ two times w.r.t t. We will denote $S_{t}=h_{j}+k_{j}+Z_{i t}, Z_{i t}=\sum_{s=2}^{t}z_{i s}$:
+\begin{center}	
+	$\Delta P_{t}=P_{t+1}-P_{t}\approx P_{t}'$\\
+	\medskip
+	$\Delta P_{t}\approx -\frac{1}{\sigma_{j t}} \left((\alpha_{j}^{*}-X_{j}'\beta)\frac{d}{dt}\omega_{j 1 t}+((1-\omega_{j 1 t}) (\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q)\frac{d\sigma_{j t}/dt}{\sigma_{j t}}\right)\phi(\Phi^{-1}(P_{t}))$
+	$\Delta P_{t}\approx -\frac{1}{\sigma_{j t}}\left((\alpha_{j}^{*}-X_{j}'\beta)(\omega_{j 1 t+1}-\omega_{j 1 t})+((1-\omega_{j 1 t}) (\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q)\frac{\sigma_{j t+1}-\sigma_{j t}}{\sigma_{j t}}\right)\phi(\Phi^{-1}(P_{t}))$
+\end{center}	
+We can compute the components obtained:
+\begin{align*}
+	\omega_{j 1 t+1}-\omega_{j 1 t}&=-\frac{h_{j}z_{i t+1}}{S_{t}S_{t+1}}\\
+	\sigma_{j t+1}-\sigma_{j t}&=\frac{\sigma_{j t+1}^{2}-\sigma_{j t}^{2}}{\sigma_{j t+1}+\sigma_{j t}}\\
+	&=\frac{1}{\sigma_{j t+1}+\sigma_{j t}} \left(\left(\frac{1}{k_{j}}+\frac{1}{d}\right)(\omega_{j 2 t+1}^{2}-\omega_{j 2 t}^{2})+\frac{Z_{i t+1}S_{t}^{2}-Z_{i t}S_{t+1}^{2}}{(S_{t}S_{t+1})^{2}}\right)\\
+	&=\frac{1}{(\sigma_{j t+1}+\sigma_{j t})(S_{t}S_{t+1})^{2}}\left(k_{j}^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)(S_{t}^{2}-S_{t+1}^{2})+Z_{i t+1}S_{t}^{2}-Z_{i t}S_{t+1}^{2}\right)\\
+	&=\frac{1}{(\sigma_{j t+1}+\sigma_{j t})(S_{t}S_{t+1})^{2}}\left(-\left(Z_{i t}+k_{j}^{2}\left(\frac{1}{k_{j}}+\frac{1}{d}\right)\right)z_{i t+1}(2S_{t}+z_{i t+1})+z_{i t+1}S_{t}^{2}\right)\\
+	&=\frac{z_{i t+1}}{(\sigma_{j t+1}+\sigma_{j t})(S_{t}S_{t+1})^{2}}\left(\left(\frac{1}{r}-S_{t}^{2}\sigma_{j t}^{2}\right)(2S_{t}+z_{i t+1})+S_{t}^{2}\right)
+\end{align*}	
+Thus, altogether, denoting $\Delta_{1}=\frac{\Delta P_{t}}{\phi(\Phi^{-1}(P_{t}))}$:
+\begin{align*}
+	&\Delta_{1}= (\alpha_{j}^{*}-X_{j}'\beta)\frac{h_{j}z_{i t+1}}{S_{t}S_{t+1}\sigma_{j t}}+\frac{((1-\omega_{j 1 t})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q)z_{i t+1}}{(\sigma_{j t+1}+\sigma_{j t})(S_{t}S_{t+1}\sigma_{j t})^{2}} \left(\left(S_{t}^{2}\sigma_{j t}^{2}-\frac{1}{r}\right)(2S_{t}+z_{i t+1})-S_{t}^{2}\right)\\
+\end{align*}	
+If we suppose $X'\beta=q$,
+\begin{align*}
+	\Delta_{1}&= (\alpha_{j}^{*}-X_{j}'\beta)\left[\frac{h_{j}z_{i t+1}}{S_{t}S_{t+1}\sigma_{j t}}+\frac{(1-\omega_{j 1 t})z_{i t+1}}{(\sigma_{j t+1}+\sigma_{j t})(S_{t}S_{t+1}\sigma_{j t})^{2}}\left(\left(S_{t}^{2}\sigma_{j t}^{2}-\frac{1}{r}\right)(2S_{t}+z_{i t+1})-S_{t}^{2}\right)\right]\\
+	\Delta_{1}&= \frac{(\alpha_{j}^{*}-X_{j}'\beta)z_{i t+1}}{(\sigma_{j t+1}+\sigma_{j t})S_{t}^{2}S_{t+1}^{2}\sigma_{j t}^{2}}\left[h_{j}(\sigma_{j t+1}+\sigma_{j t})\sigma_{j t}S_{t}S_{t+1}+(1-\omega_{j 1 t})\left(\left(S_{t}^{2}\sigma_{j t}^{2}-\frac{1}{r}\right)(2S_{t}+z_{i t+1})-S_{t}^{2}\right)\right]\\
+\end{align*}	
+The term in brackets seems to be positive as all its components but one are positive, but is not obvious to show in the general case. We can admit this property as a requirement of consistency of the model (supposing the parameters are adapted). Since
+\begin{align*}
+	\left(S_{t}^{2}\sigma_{j t}^{2}-\frac{1}{r}\right)(2S_{t}+z_{i t+1})-S_{t}^{2}=(Z_{i t}+k_{j})^{2}+2(h_{j}+k_{j}+Z_{i t})\frac{k_{j}^{2}}{d}+(Z_{i t}+k_{j}+\frac{k_{j}^{2}}{d})z_{i t+1}-h_{j}^{2},
+\end{align*}
+sufficient conditions for positivity at all dates are $h_{j}<k_{j}$ or $h_{j}<\frac{2k_{j}^{2}}{d}$.\\
+\medspace
+In these cases we obtain a consistent model, as announced by Moretti.
