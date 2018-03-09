@@ -29,9 +29,9 @@ so, with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$,
 	$\omega_j=\frac{h_{j}}{h_{j}+k_{j}}$.
 \end{center}
 Thus:
-\begin{equation}
+\begin{align*}
 	\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j}, \omega_j=\frac{h_{j}}{h_{j}+k_{j}}, h_{j}=\frac{d m_{j}}{d+m_{j}}.
-\end{equation}
+\end{align*}
 	
 \section*{Appendix 2: Probability of Watching in the First Week}
 
@@ -43,7 +43,7 @@ The sought probability of watching is:
 	&=\mathbb{P}((1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q>-(1-\omega_{j})(\epsilon_{i j}+v_{i j})+u_{i t})\\
 	&=\Phi\left(\frac{(1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j 1}}\right),
 \end{align*}
-where $\sigma_{j 1}$ is the variance of the expression just above, and $\Phi$ is the cumulative function of a standard normal distribution $\mathcal{N}(0,1)$. All remaining random variables (which are all zero-mean) have been eliminated in the expression with the normal distribution $\Phi$ ($\alpha_{j}^{*}$ is no longer random according to the previous remark). Since the variance of a sum of independant normal variables is the sum of the variances: 
+where $\sigma_{j 1}$ is the variance of the expression just above, and $\Phi$ is the cumulative function of a standard normal distribution $\mathcal{N}(0,1)$. All remaining random variables (which are all zero-mean) have been eliminated in the expression with the normal distribution $\Phi$ ($\alpha_{j}^{*}$ is no longer random according to the previous remark). Since the variance of a sum of independant  variables is the sum of the variances: 
 \begin{align*}
 	\sigma_{j 1}^{2}
 	&=Var(-(1-\omega_{j})(\epsilon_{i j}+v_{i j})+u_{i t})\\
@@ -52,7 +52,7 @@ where $\sigma_{j 1}$ is the variance of the expression just above, and $\Phi$ is
 \end{align*}
 	
 \section*{Appendix 3: Signal with Feedback}
-From the information consumer i has, he can estimate the real quality $\alpha_{j}^{*}$ by maximizing the likelihood function:
+From the information consumer i has, she can estimate the real quality $\alpha_{j}^{*}$ by maximizing the likelihood function:
 \begin{align*}
 	L_{i j 2}&=L[U_{1 j},...U_{n_{i} j}, n_{i}|\alpha_{j}^{*}]\\
 	&=\prod_{p=1}^{n_{i}}\mathbb{P}_{\alpha_{j}^{*}}(V_{p j}>q \wedge U_{p j}=\alpha_{j}^{*}+v_{p j})
@@ -95,16 +95,16 @@ Since $\Phi'(x)=\phi(x)$ and $\phi'(x)=-x\phi(x)$,
 	\sqrt{d}\sum_{p=1}^{n_{i}}(\sqrt{d}(U_{p j}-\alpha_{j}^{*}))
 	=\frac{1-\omega_{j}}{\sigma_{V}}(N_{i}-n_{i})\frac{\phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}\\	
 \end{align*}
-\begin{equation}
+\begin{align*}
 	\alpha_{j}^{*}=\frac{1}{n_{i}}\sum_{p=1}^{n_{i}}U_{p j}-\frac{1-\omega_{j}}{d\sigma_{V}}\frac{N_{i}-n_{i}}{n_{i}}\frac{\phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}{\Phi\left(\frac{q-\omega_{j}X'_{j}\beta-(1-\omega_{j})\alpha_{j}^{*}}{\sigma_{V}}\right)}\\
-\end{equation}
+\end{align*}
 	
 We denote the associated maximum likelihood estimator $S_{i j 2}$. The second part of the expression is negative so that $S_{i j 2}$ is lower than the average of the ex-post utilities consumer i recieves; this is the impact of non-viewers.\\
 
 Moretti underlines that the estimator obtained is unbiased and asymptotically normal (this second property comes from the fact that the estimator is a likelihood maximizer): 
-\begin{equation}
+\begin{align*}
 	S_{i j 2}\sim\mathcal{N}(\alpha_{j}^{*}, \frac{1}{b_{i 2}}) , b_{i 2}=dn_{i}+(N_{i}-n_{i})\frac{\phi(c)}{\Phi(c)}\left(c+\frac{\phi(c)}{\Phi(c)}\right)(\frac{1-\omega_{j}}{\sigma_{V}})^{2}
-\end{equation}\\
+\end{align*}\\
 \\
 At the following dates $t\geqslant2$, using the equation (8) from the next part, the estimator for $\alpha_{j}^{*}$ maximizes the likelihood function:
 \begin{align*}
@@ -125,9 +125,9 @@ Just like before, the probability of watching at week t is:
 	>-\omega_{j 2 t}(\epsilon_{i j}+v_{i j})-\sum_{w=2}^{t}\omega_{j 3 w}(S_{i j w}-\alpha_{j}^{*})+u_{i t}\right).\\
 \end{align*}
 Thus:
-\begin{equation}
+\begin{align*}
 	P_{t}=\Phi\left(\frac{(1-\omega_{j 1 t})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j t}}\right),
-\end{equation}
+\end{align*}
 with (admitted):
 \begin{align*}
 	\sigma_{j t}^{2}
