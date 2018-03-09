@@ -141,7 +141,7 @@ For instance, to test $H_0:~2(\beta_2 + \beta_4) < 0$ against $H_1:~2(\beta_2 + 
 where $\text{se}(2(\hat{\beta}_2 + \hat{\beta}_4)) = 2[\text{Var}(\hat{\beta}_2) + \text{Var}(\hat{\beta}_4) + 2\cdot \text{Cov}(\hat{\beta}_2, \hat{\beta}_4)]^{1/2}$ is the standard error of $2(\hat{\beta}_2 + \hat{\beta}_4)$.
 
 With the US data, both hypotheses cannot be rejected with a good confidence.
-With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0 ($t \approx 36.72$ and $p \approx 0$). 
+With French data, the $p$-value for the test of convexity of negative-surprise movies is really close to 0 ($t \approx 36.72$ and $p \approx 0$).\footnote{R is unable to give a closer approximation for the $p$-values.}
 However, the hypothesis of concavity of positive-surprise movies must be rejected ($t \approx 9.41$ and $p \approx 1$).
 What we can say however is that the sales profile of positive-surprise movies is \textit{more concave} than the sales profile of negative-surprise movies because the estimates show that the coefficient $\beta_4$ is significantly negative.
 These statements are confirmed by the graphs of the sales profile of figure \ref{part2.1_plot_moretti} where the sales profile of negative-surprise movies is clearly convex and the sales profile of positive-surprise movies seems linear.
