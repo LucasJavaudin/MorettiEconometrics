@@ -7,12 +7,12 @@
 % The effect of a surprise should be lower for movies with a more precise prior. To test this, we augment the previous regression equation with the interaction of time and the precision of the prior and the interaction of time, precision of the prior and surprise of the movie (whose coefficient is predicted to be negative). The precision of the prior can be a dummy for sequels (sequels are assumed to have a more precise prior) or can be measured by the variance of the first week surprise for movies of the same genre.
 
 
-Moretti's purpose is to provide evidence of social learning in consumption, that is to say that people tend to take into account their peers' experience to get a more precise idea of the value of a good. Economists, Moretti says, have had difficulties showing such social learning effects because of the absence of useful microdata on the matter. Moretti's innovation lies in his use of market-level data to identify social learning. He does so by defining what he calls ``surprises'' in movie sales: surprises, as their name suggests, consist in the difference between expected and actual sales. Moretti proposes that if we observe a surprise, we should also observe social learning effects: if a film is better or worse than expected, then by gathering experiences through peers, people should reconsider their expectations and we might be able to see it in the data. In particular, Moretti makes five predictions on things we should be able to observe in presence of social learning: \begin{enumerate}
+Moretti's purpose is to provide evidence of social learning in consumption, that is to say that people tend to take into account their peers' experience to get a more precise idea of the value of a good. Economists, Moretti says, have had difficulties showing such social learning effects because of the absence of useful microdata on the matter. Moretti's innovation lies in his use of market-level data to identify social learning. He does so by defining what he calls 'surprises' in movie sales, as seen before. Moretti proposes that if we observe a surprise, we should also observe social learning effects: if a film is better or worse than expected, then by gathering experiences through peers, people should reconsider their expectations and we might be able to see it in the data. In particular, Moretti makes five predictions on facts we should be able to observe in presence of social learning: \begin{enumerate}
 	\item in presence of social learning, sales of movies with positive and negative surprises should diverge: sales of better-than-expected movies should decrease at a lower rate than worse ones (see \ref{subsec2.2}); 
-	\item we should observe less social learning effects from a movie on which quality we have a precise idea and more social learning effects from movies which have a more uncertain quality (see \ref{subsec2.3});
+	\item we should observe less social learning effects from a movie on which quality we have a precise idea and more social learning effects than from movies which have a more uncertain quality (see \ref{subsec2.3});
 	\item we should observe more social learning effects when people have a greater social network (see \ref{subsec2.4});
 	\item we should be able to observe that the effects of a surprise decline over time: once the information on the quality of a movie has been shared, what was a surprise should not play a major role in sales (see \ref{subsec2.5});
-	\item we should not observe social learning effects when a surprise is due to elements other than quality of the film (let say weather).
+	\item we should not observe social learning effects when a surprise is due to elements other than quality of the film (like weather).
 \end{enumerate}
 We have replicated Moretti's work and tried to confront his predictions with French data.
 
@@ -26,10 +26,10 @@ This justification appears strange to us, even though we obtain very close resul
 
 The French data is already cleaned.
 We change the structure of the data to bring it closer to the structure of the US data.
-To replace the initial dataset where there is one variable for tickets sold of week 1 to 13 (\textit{entree\_fr1}, ..., \textit{entree\_fr13}), we build a dataset where there is a single variable for tickets sold (\textit{entree\_fr}) but one observation per week.
+To replace the initial dataset where there is one variable for tickets sold for each week 1 to 13 (\textit{entree\_fr1}, ..., \textit{entree\_fr13}), we build a dataset where there is a single variable for tickets sold (\textit{entree\_fr}) but one observation per week.
 This manipulation allows us to use a very similar code for both datasets.
 
-While the US data indicate the sales of the movies, the French data report the tickets sold. 
+While the US data indicates the sales of the movies, the French data reports the tickets sold. 
 Hence, there is no need to correct the data for inflation effects like we do with the US data.
 
 We compute all the regressions with the tickets sold and the number of screens in Paris only and in France as a whole.
@@ -123,7 +123,7 @@ We perform the same kind of regression on French data from 2004 to 2008 and find
 		\textit{Note:}  & \multicolumn{7}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 	\end{tabular} 
 \end{table} 
-We can see that the number of sales in first week is highly explained by the number of screens opened. This result holds even when adding controls: each column corresponds to a regression in which we added a control variable (genre, ratings, distributors, month and week, year, and some other variables). The richness of the French dataset allows us to control with more variables than Moretti. In particular, we added a variable \textit{MoyennePresse} which corresponds to a grade attributed by film critics. We decided not to add the \textit{MoyenneSpectateurs} variable which is not available for theaters before the opening week.
+We can see that the number of sales in first week is highly explained by the number of screens opened. This result holds even when adding controls: each column corresponds to a regression in which we added a control variable (genre, ratings, distributors, month and week, year, and some other variables). The richness of the French dataset allows us to control for more variables than Moretti. In particular, we added a variable \textit{MoyennePresse} which corresponds to a grade attributed by film critics. We decided not to add the \textit{MoyenneSpectateurs} variable which is not available for theaters before the opening week.
 
 \subsection{Divergence of the Sales}\label{subsec2.2}
 
