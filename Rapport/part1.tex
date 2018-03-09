@@ -1,10 +1,10 @@
-			Moretti develops a model that defines social learning as the effect of one consumer's opinion the consumption of a good on his acquaintances' willingness to consume.
+			Moretti develops a model that defines social learning as the effect of one consumer's opinion on the consumption of a good, on his acquaintances' willingness to consume.
 			Applied to cinema, his idea is that consumers go and see a certain film if they get a sufficient expected utility to compensate the cost of viewing.
 	\subsection{Utility Estimation before a Movie Is Released}	
 	\subsubsection{Actual Utility}
-			The utility provided by a given film (called "quality") is estimated by the consumers before the movie is being launched. They use the objective elements about the film, available to them all, to get a \textit{prior}. Consumers also get a personal \textit{signal} that indicates how much they are attracted by the film's concept.
+		The utility provided by a given film (called 'quality') is estimated by the consumers before the movie is being launched. They use the objective elements about the film, available to them all, to get a \textit{prior}. Consumers also get a personal \textit{signal} that indicates how much they are attracted by the film's concept.
 
-			Movie theatres only get a prior, and estimate the appeal for the film from it. They are profit-maximizing firms, so they have incentives to correctly estimate the number of screens for a given film using the prior.
+		Movie theatres only get a prior, and estimate the appeal for the film from it. They are profit-maximizing firms, so they have incentives to correctly estimate the number of screens for a given film using the prior.
 
 	An individual $i$ gets a utility $U_{i,j}$ watching the film $j$ with
 	\begin{equation} \label{eq:1}
@@ -18,12 +18,12 @@
 	
 	This variable's mean (referred to previously as the prior) can be estimated from all the observable features of the film (such as the director, the budget, the casting...), that are aggregated into the variable $X_{j}$. Thus, $\mathbb{E}(\alpha_{j}^{*})=X_{j}'\beta$, like in a simple linear model. This expression embodies one of Moretti's key ideas in his paper, that a film's quality is the only determiner of the utility if we omit interpersonal differences in tastes.
 
-	The variance of $\alpha_{j}^{*}$ does not depend on the individual doing the estimation (all individual are supposed to have the same information about the film and to analyse it the same way). Nevertheless, it depends on the movie. Sequels and films shot by famous directors are characterised by a much lower variance since the outcome (success or failure) of the previous movies could be observed.
+	The variance of $\alpha_{j}^{*}$ does not depend on the individual doing the estimation (all individual are supposed to have the same information about the film and to analyse it the same way). Nevertheless, it depends on the movie. Sequels and films shot by famous directors are characterised by a much lower variance since the outcome (success or failure) of similar movies could be observed.
 
 	Thus: $\alpha_{j}^{*}\sim \mathcal{N}(X_{j}'\beta,\frac{1}{m_{j}})$.
 	
 	\subsubsection{Signal: Noisy Utility}
-	Moretti supposes that consumers do not measure the utility $U_{i,j}$ he could get by watching the film, but receives instead a noisy signal
+	Moretti supposes that consumers do not measure the utility $U_{i,j}$ she could get by watching the film, but receives instead a noisy signal
 	\begin{equation*}
 	s_{i j}=U_{i j}+\epsilon_{i j}, \quad\epsilon_{i j}\sim \mathcal{N}(0,\frac{1}{k_{j}}).
 	\end{equation*}
@@ -56,18 +56,11 @@
 	\end{equation}
 	According to Appendix 1, the solution is
 	\begin{align*}
-		\omega_{j}(\frac{1}{h_{j}}+\frac{1}{k_{j}})&=\frac{1}{k_{j}},\\
-		\omega_j&=\frac{h_{j}}{h_{j}+k_{j}},
-	\end{align*}
-	with $h_{j}=\dfrac{1}{\frac{1}{d}+\frac{1}{m_{j}}}=\frac{d m_{j}}{d+m_{j}}$ ($h_{j}=Var(U_{i j})$ too).
-
-	Thus:
-	\begin{align*}
 		\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]&=\omega_{j} X_{j}'\beta+(1-\omega_{j})s_{i j},\\
-		\omega_j&=\frac{h_{j}}{h_{j}+k_{j}},\\ 
-		h_{j}&=\frac{d m_{j}}{d+m_{j}}.
+		\omega_j&=\frac{h_{j}}{h_{j}+k_{j}},\\
+		h_{j}&=\frac{d m_{j}}{d+m_{j}}=Var(U_{i j}).
 	\end{align*}
-	
+
 	\subsubsection{Cost of Watching}
 	In the model, a consumer decides to go and watch a film if her utility is higher than her subjective cost of watching in the week considered (parameter $t$), depending for example on whether she has a lot or a few activities planned during the week: 
 	\begin{equation}
@@ -76,7 +69,7 @@
 	To model the idea that the cost depends on the individual and on the week, Moretti supposes that $q_{i t}=q+u_{i t}$ with $u_{i j}\sim \mathcal{N}(0,\frac{1}{r})$ with all $u_{i t}$ independent. $u_{i t}$ is zero-mean so the cost of watching has the same average value (between individuals) every week, and the same average for a given individual during a long period of time. As a consequence, the consumers are considered similar; the structural difference of timetable between positions and jobs is not taken into account, or it is supposed not to influence the possibility to go to the movies.
 	
 	\subsubsection{Probability of Watching}
-	Let us now compute the probability for individual $i$ to go to see movie $j$ in the first week. To do so, we will have to change the viewpoint, from the consumer deciding whether or not to see a movie, to an observer of the market looking at the result of consumer's decision at an aggregate level. The aim is to get a formula that is possible to use. More precisely, all variables with indexes $i$ won't be observable any more, but the average $\alpha_{j}^{*}$ is now observable (thus precisely determined); this induces a certain form for the result. The sought probability of watching is in this context:
+	We can compute the probability for an individual $i$ to go to see movie $j$ in the first week. To do so, we will have to change the viewpoint, from the consumer deciding whether or not to see a movie, to an observer of the market looking at the result of consumer's decision at an aggregate level. The aim is to get a formula that is possible to use. More precisely, all variables with indexes $i$ won't be observable any more, but the average $\alpha_{j}^{*}$ is now observable (thus precisely determined); this induces a certain form for the result. The sought probability of watching is in this context:
 	\begin{equation} \label{eq:4}
 	P_{1}=\mathbb{P}(\mathbb{E}_1[U_{i j}|X_{j}'\beta, s_{i j}]>q_{i t})=\Phi\left(\frac{(1-\omega_{j})(\alpha_{j}^{*}-X_{j}'\beta)+X_{j}'\beta-q}{\sigma_{j 1}}\right),
 	\end{equation}
@@ -128,24 +121,22 @@
 	\mathbb{E}_2[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}]=\frac{h_{j}}{h_{j}+k_{j}+z_{i 2}} X_{j}'\beta+\frac{k_{j}}{h_{j}+k_{j}+z_{i 2}}s_{i j}+\frac{z_{i 2}}{h_{j}+k_{j}+z_{i 2}}S_{i j 2}, 
 	\end{equation}
 	\begin{align*}
-	h_{j}=\frac{d m_{j}}{d+m_{j}}, z_{i 2}=\frac{b_{i 2}d}{b_{i 2}+d}.
+	h_{j}=\frac{d m_{j}}{d+m_{j}}, z_{i 2}=\frac{b_{i 2}d}{b_{i 2}+d}.\\
 	\end{align*}
+
 	Likewise, in week $t\geq2$, the expected utility is
-	\begin{align*}
-	\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]=\frac{h_{j}X_{j}'\beta}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}} +\frac{k_{j}s_{i j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}+\sum_{w=2}^{t}\frac{z_{i w}S_{i j 2}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, 
-	\end{align*}
 	\begin{equation}
 	\mathbb{E}_t[U_{i j}|X_{j}'\beta, s_{i j}, S_{i j 2}, ..., S_{i j t}]=\omega_{j 1 t}X_{j}'\beta +\omega_{j 2 t}s_{i j}+\sum_{w=2}^{t}\omega_{j 3 w}S_{i j w}, 
 	\end{equation}
 	\begin{align*}
-		\omega_{j 1 t}&=\frac{h_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, \\
-		\omega_{j 2 t}&=\frac{k_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}}, \\
+		\omega_{j 1 t}&=\frac{h_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}},\\
+		\omega_{j 2 t}&=\frac{k_{j}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}},\\
 		\omega_{j 3 w}&=\frac{z_{i w}}{h_{j}+k_{j}+\sum_{s=2}^{t}z_{i s}},\\
-		h_{j}&=\frac{d m_{j}}{d+m_{j}}, \\
+		h_{j}&=\frac{d m_{j}}{d+m_{j}}\\
 		z_{i t}&=\frac{b_{i t}d}{b_{i t}+d}.
 	\end{align*}
 	
-	This equation shows that a given piece of information has a decreasing importance in the final decision from week to week.
+	This equation shows that a given piece of information has a decreasing importance in the final decision from week to week: there is a supplmentary term $\sum_{s=2}^{t}z_{i s}$ in all the coefficients' expressions.
 	
 	\subsubsection{Probability of Watching}
 	Just like before, the probability of watching at week $t$ is (see Appendix 4):
